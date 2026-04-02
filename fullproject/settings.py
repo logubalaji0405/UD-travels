@@ -15,11 +15,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-key")
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", ".vercel.app"]   # simple for first deploy
+ALLOWED_HOSTS = [
+    "ud-travels.onrender.com",
+    "127.0.0.1",
+    "localhost",
+]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://ud-travels.onrender.com",
+]
 
-
-# ===============================
+# ==============================
 # APPLICATIONS
 # ===============================
 INSTALLED_APPS = [
@@ -37,11 +43,11 @@ INSTALLED_APPS = [
 # ===============================
 # MIDDLEWARE
 # ===============================
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',  # ADD THIS
     'django.contrib.sessions.middleware.SessionMiddleware',
-
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

@@ -1,0 +1,113 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center/cover;
+    }
+
+    .page-wrapper {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-card {
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(10px);
+        padding: 40px;
+        width: 100%;
+        max-width: 400px;
+        border-radius: 15px;
+        color: white;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .login-card h3 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #00e6e6;
+    }
+
+    form input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 12px;
+        border-radius: 8px;
+        border: none;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+    }
+
+    form input:focus {
+        outline: none;
+        box-shadow: 0 0 8px #00e6e6;
+    }
+
+    .btn-login {
+        width: 100%;
+        padding: 12px;
+        background: #00e6e6;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+    }
+
+    .btn-login:hover {
+        background: #00b3b3;
+        color: white;
+    }
+
+    .alert-danger {
+        background: rgba(255, 0, 0, 0.2);
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .register-link {
+        text-align: center;
+        display: block;
+        margin-top: 15px;
+        color: #00e6e6;
+    }
+</style>
+
+<div class="page-wrapper">
+    <div class="login-card">
+
+        <h3>🔐 Login</h3>
+
+        <form method="post">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+            {% endif %}
+
+            {% for field in form %}
+            <p>
+                {{ field.label }} <br>
+                {{ field }}
+                {% if field.errors %}
+                <span class="errorlist">{{ field.errors }}</span>
+                {% endif %}
+            </p>
+            {% endfor %}
+
+            <button type="submit" class="btn-login">Login</button>
+        </form>
+
+        <a href="{% url 'register' %}" class="register-link">
+            Don't have account? Register
+        </a>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,198 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<style>
+body {
+    background: linear-gradient(rgba(44,18,10,0.6), rgba(44,18,10,0.6)),
+                url('https://images.unsplash.com/photo-1589302168068-964664d93dc0');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.payment-card {
+    border-radius: 25px;
+    background: rgba(255, 248, 240, 0.95);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.title {
+    font-weight: 800;
+    color: #6a1b1b;
+}
+
+.label {
+    font-weight: 600;
+    color: #5d4037;
+}
+
+.form-control {
+    border-radius: 12px;
+    border: 1px solid #e7d6b8;
+}
+
+.form-control:focus {
+    border-color: #b8860b;
+    box-shadow: 0 0 6px rgba(184,134,11,0.3);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg,#8d1f1f,#d4a437);
+    border: none;
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+.btn-success {
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+.summary-box {
+    background: #fff8e7;
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.qr-box {
+    background: #fff;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+</style>
+
+<div class="container mt-5 pt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card payment-card p-4">
+
+                <h3 class="text-center mb-4 title">💳 Tamil Nadu Payment</h3>
+
+                <div class="summary-box">
+                    <p><strong>👤 Name:</strong> {{ booking.name }}</p>
+                    <p><strong>📍 Destination:</strong> {{ booking.destination }}</p>
+                    <p><strong>⏳ Duration:</strong> {{ booking.duration }}</p>
+                    <p><strong>Vehicle Type:</strong> {{ booking.vehicle_type }}</p>
+                    <p><strong>👥 Guests:</strong> {{ booking.guests }}</p>
+                    <p><strong>💰 Total:</strong> ₹{{ booking.total_amount }}</p>
+                </div>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label class="label">Payment Type</label>
+                        <select name="payment_type" id="payment_type" class="form-control">
+                            <option value="">Select</option>
+                            <option value="full">Full</option>
+                            <option value="advance">Advance (2%)</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="label">Amount</label>
+                        <input type="text" id="amount" class="form-control" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="label">Payment Method</label>
+                        <select name="payment_method" id="payment_method" class="form-control">
+                            <option value="">Select</option>
+                            <option value="UPI">UPI</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3 d-none" id="upi_options_box">
+                        <label class="label">Choose UPI App</label>
+                        <select name="upi_app" class="form-control">
+                            <option>GPay</option>
+                            <option>PhonePe</option>
+                            <option>Paytm</option>
+                        </select>
+                    </div>
+
+                    <button type="button" id="generateQRBtn" class="btn btn-primary w-100 mb-3">
+                        Generate QR
+                    </button>
+
+                    <div id="qr_box" class="qr-box text-center d-none">
+                        <div id="qr_container"></div>
+                    </div>
+
+                    <div class="mb-3 mt-3 d-none" id="screenshot_box">
+                        <label class="label">Upload Screenshot</label>
+                        <input type="file" name="payment_screenshot" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100">
+                        Confirm Payment
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+const paymentType = document.getElementById("payment_type");
+const amountInput = document.getElementById("amount");
+const paymentMethod = document.getElementById("payment_method");
+const upiOptionsBox = document.getElementById("upi_options_box");
+const qrBox = document.getElementById("qr_box");
+const qrContainer = document.getElementById("qr_container");
+const screenshotBox = document.getElementById("screenshot_box");
+
+const totalAmount = parseFloat("{{ booking.total_amount }}");
+
+function updateAmount() {
+    if (paymentType.value === "full") {
+        amountInput.value = totalAmount.toFixed(2);
+    } else if (paymentType.value === "advance") {
+        amountInput.value = (totalAmount * 0.02).toFixed(2);
+    }
+}
+
+function updateFields() {
+    if (paymentMethod.value === "UPI") {
+        upiOptionsBox.classList.remove("d-none");
+    }
+}
+
+paymentType.addEventListener("change", updateAmount);
+paymentMethod.addEventListener("change", updateFields);
+
+document.getElementById("generateQRBtn").addEventListener("click", function () {
+
+    fetch("", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value,
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: new URLSearchParams({
+            payment_type: paymentType.value,
+            payment_method: paymentMethod.value,
+            generate_qr: "1"
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.qr_code) {
+            qrBox.classList.remove("d-none");
+            screenshotBox.classList.remove("d-none");
+
+            qrContainer.innerHTML = `
+                <img src="data:image/png;base64,${data.qr_code}" style="width:200px;">
+            `;
+        }
+    });
+});
+</script>
+
+{% endblock %}

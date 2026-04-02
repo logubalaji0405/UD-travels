@@ -1,0 +1,201 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<style>
+
+/* ================= BANNER ================= */
+
+.page-banner {
+    position: relative;
+    height: 350px;
+    overflow: hidden;
+}
+
+.page-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.page-banner .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-banner h2 {
+    font-size: 45px;
+    font-weight: 700;
+}
+
+.page-banner span {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* ================= PRIVACY PAGE ================= */
+
+#privacy {
+    max-width: 1100px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+/* ================= HIGHLIGHT ================= */
+
+.highlight {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 30px 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.hi-icon {
+    font-size: 30px;
+}
+
+/* ================= POLICY BLOCK ================= */
+
+.policy-block {
+    background: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.policy-block:hover {
+    transform: translateY(-5px);
+}
+
+/* ================= HEADINGS ================= */
+
+.policy-block h3 {
+    margin-bottom: 15px;
+    color: #0072ff;
+    font-weight: 600;
+}
+
+/* ================= LIST ================= */
+
+.policy-block ul {
+    padding-left: 20px;
+}
+
+.policy-block ul li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+/* ================= PARAGRAPH ================= */
+
+.policy-block p {
+    line-height: 1.6;
+    color: #444;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+
+    .highlight {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hi-icon {
+        font-size: 25px;
+    }
+
+    .page-banner h2 {
+        font-size: 30px;
+    }
+
+}
+
+</style>
+{% include 'hf/nav2.html' %}
+
+<!-- ═══════════════════════════════════════ -->
+<!--          PRIVACY POLICY PAGE            -->
+<!-- ═══════════════════════════════════════ -->
+
+<div id="privacy" class="content-area mt-5">
+
+  <!-- Banner -->
+  <div class="page-banner">
+    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80" alt="Privacy">
+    <div class="overlay">
+      <span>Your Data is Safe</span>
+      <h2>Privacy Policy</h2>
+    </div>
+  </div>
+
+  <!-- Highlight -->
+  <div class="highlight">
+    <div class="hi-icon">🔒</div>
+    <div>
+      <h4>Last Updated: March 2026</h4>
+      <p>UD-Traveler is committed to protecting your personal information. This policy explains what data we collect, how we use it, and how we keep it safe.</p>
+    </div>
+  </div>
+
+  <!-- Sections -->
+  <div class="policy-block">
+    <h3>📋 Information We Collect</h3>
+    <ul>
+      <li>Personal details: Name, email address, phone number</li>
+      <li>Booking information: Travel dates, destination, number of travelers</li>
+      <li>Payment information: Processed securely — we never store card details</li>
+      <li>Device data: Browser type, IP address, pages visited</li>
+    </ul>
+  </div>
+
+  <div class="policy-block">
+    <h3>🎯 How We Use Your Information</h3>
+    <ul>
+      <li>To confirm and manage your travel bookings</li>
+      <li>To send booking confirmations and updates</li>
+      <li>To improve website experience</li>
+      <li>To send offers (only if you opt-in)</li>
+      <li>To comply with legal requirements</li>
+    </ul>
+  </div>
+
+  <div class="policy-block">
+    <h3>🔐 How We Protect Your Data</h3>
+    <p>We use SSL encryption and secure payment gateways. Your data is safe and never sold to third parties.</p>
+  </div>
+
+  <div class="policy-block">
+    <h3>🍪 Cookies</h3>
+    <p>Cookies help improve your experience. You can disable them in your browser settings.</p>
+  </div>
+
+  <div class="policy-block">
+    <h3>✉️ Your Rights</h3>
+    <ul>
+      <li>Access your data</li>
+      <li>Correct or delete data</li>
+      <li>Opt-out of marketing</li>
+      <li>Email: <strong>privacy@udtraveler.com</strong></li>
+    </ul>
+  </div>
+
+</div>
+
+{% endblock %}

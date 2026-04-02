@@ -1,0 +1,890 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
+
+    :root{
+        --primary: #0F4C5C;
+        --primary-dark: #0A3945;
+        --secondary: #E9A03B;
+        --accent: #FFD166;
+        --bg-light: #F8FBFD;
+        --bg-soft: #EEF6F8;
+        --white: #FFFFFF;
+        --text-dark: #1F2937;
+        --text-soft: #5B6B73;
+        --danger-soft: #E76F51;
+        --shadow: 0 12px 30px rgba(15, 76, 92, 0.12);
+        --shadow-hover: 0 18px 40px rgba(15, 76, 92, 0.18);
+        --radius-lg: 24px;
+        --radius-md: 18px;
+    }
+
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    body{
+        background: var(--bg-light);
+        color: var(--text-dark);
+    }
+
+    a{
+        text-decoration: none;
+    }
+
+    .hero-section{
+        margin-top: 65px;
+    }
+
+    .hero-banner{
+        position: relative;
+        overflow: hidden;
+        border-radius: 0 0 30px 30px;
+    }
+
+    .hero-banner::before{
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(15,76,92,0.62));
+        z-index: 1;
+    }
+
+    .bimg{
+        width: 100%;
+        height: 720px;
+        object-fit: cover;
+    }
+
+    .hero-content,
+    .addbanner2,
+    .addbanner3{
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .hero-inner{
+        width: 100%;
+        max-width: 950px;
+        color: white;
+    }
+
+    .hero-badge{
+        display: inline-block;
+        padding: 8px 18px;
+        border-radius: 50px;
+        background: rgba(255,255,255,0.14);
+        border: 1px solid rgba(255,255,255,0.24);
+        backdrop-filter: blur(6px);
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 18px;
+    }
+
+    .btitle{
+        font-family: 'Playfair Display', serif;
+        font-size: 72px;
+        font-weight: 800;
+        line-height: 1.15;
+        letter-spacing: 1px;
+        background: linear-gradient(90deg, #ffffff, var(--accent), var(--secondary), #ffffff);
+        background-size: 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientMove 6s linear infinite;
+        text-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    }
+
+    .bcaption{
+        font-size: 21px;
+        margin-top: 16px;
+        color: #fef7ea;
+        line-height: 1.8;
+        max-width: 780px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-btns{
+        margin-top: 28px;
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    .btn-main,
+    .btn-outline-main{
+        padding: 13px 28px;
+        border-radius: 50px;
+        font-weight: 700;
+        transition: 0.35s ease;
+        display: inline-block;
+    }
+
+    .btn-main{
+        background: linear-gradient(135deg, var(--secondary), var(--accent));
+        color: #5a3a00;
+        box-shadow: 0 10px 25px rgba(233, 160, 59, 0.35);
+    }
+
+    .btn-main:hover{
+        transform: translateY(-3px);
+        color: #5a3a00;
+    }
+
+    .btn-outline-main{
+        background: rgba(255,255,255,0.10);
+        color: white;
+        border: 1px solid rgba(255,255,255,0.35);
+        backdrop-filter: blur(4px);
+    }
+
+    .btn-outline-main:hover{
+        transform: translateY(-3px);
+        background: rgba(255,255,255,0.18);
+        color: white;
+    }
+
+    @keyframes gradientMove{
+        0%{ background-position: 0%; }
+        100%{ background-position: 300%; }
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon{
+        background-color: rgba(15, 76, 92, 0.78);
+        border-radius: 50%;
+        padding: 22px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+    }
+
+    .section-space{
+        padding: 80px 0 20px;
+    }
+
+    .section-title{
+        text-align: center;
+        font-weight: 800;
+        font-size: 2.3rem;
+        color: var(--primary);
+        margin-bottom: 14px;
+        position: relative;
+    }
+
+    .section-title::after{
+        content: "";
+        width: 90px;
+        height: 4px;
+        background: linear-gradient(to right, var(--secondary), var(--accent));
+        display: block;
+        margin: 12px auto 0;
+        border-radius: 10px;
+    }
+
+    .section-subtitle{
+        max-width: 760px;
+        margin: 0 auto 44px;
+        text-align: center;
+        color: var(--text-soft);
+        font-size: 15px;
+        line-height: 1.8;
+    }
+
+    .travel-types{
+        padding: 30px 0 10px;
+    }
+
+    .type-card{
+        margin-top: 24px;
+        height: 160px;
+        background: linear-gradient(135deg, var(--white), var(--bg-soft));
+        padding: 20px;
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow);
+        transition: .4s;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid rgba(15,76,92,0.08);
+        text-align: center;
+    }
+
+    .type-card i{
+        font-size: 34px;
+        color: var(--secondary);
+        margin-bottom: 12px;
+    }
+
+    .type-card h6{
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 0;
+    }
+
+    .type-card:hover{
+        transform: translateY(-10px);
+        background: linear-gradient(135deg, var(--primary), #177086);
+        box-shadow: var(--shadow-hover);
+    }
+
+    .type-card:hover i,
+    .type-card:hover h6{
+        color: white;
+    }
+
+    .place-card{
+        border-radius: 24px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: var(--shadow);
+        transition: 0.45s ease;
+        background: var(--white);
+    }
+
+    .place-card:hover{
+        transform: translateY(-12px);
+        box-shadow: var(--shadow-hover);
+    }
+
+    .place-card img{
+        height: 420px;
+        object-fit: cover;
+        transition: 0.9s;
+    }
+
+    .place-card:hover img{
+        transform: scale(1.08);
+    }
+
+    .place-badge{
+        position: absolute;
+        top: 18px;
+        left: 18px;
+        z-index: 5;
+        background: rgba(255,255,255,0.92);
+        color: var(--primary);
+        padding: 7px 14px;
+        border-radius: 50px;
+        font-size: 12px;
+        font-weight: 700;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    .image-overlay{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 22px;
+        color: white;
+        background: linear-gradient(to top, rgba(15,76,92,0.95), rgba(0,0,0,0.10));
+        transform: translateY(100%);
+        transition: .45s ease;
+    }
+
+    .place-card:hover .image-overlay{
+        transform: translateY(0);
+    }
+
+    .image-overlay h3{
+        font-size: 24px;
+        font-weight: 800;
+        margin-bottom: 6px;
+        color: var(--accent);
+    }
+
+    .image-overlay p{
+        font-size: 14px;
+        color: #f7fbfc;
+        margin-bottom: 14px;
+        line-height: 1.6;
+    }
+
+    .mini-btn{
+        display: inline-block;
+        padding: 9px 18px;
+        border-radius: 30px;
+        background: linear-gradient(135deg, var(--secondary), var(--accent));
+        color: #5a3a00;
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .mini-btn:hover{
+        color: #5a3a00;
+    }
+
+    .premium-section{
+        background: linear-gradient(135deg, #f3fafc, #e8f3f6);
+        padding: 80px 0;
+        margin-top: 40px;
+    }
+
+    .choose-card{
+        text-align: center;
+        padding: 28px 18px;
+        border-radius: 22px;
+        background: rgba(255,255,255,0.90);
+        box-shadow: var(--shadow);
+        height: 100%;
+        transition: 0.35s ease;
+    }
+
+    .choose-card:hover{
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-hover);
+    }
+
+    .choose-card i{
+        font-size: 42px;
+        color: var(--secondary);
+    }
+
+    .choose-card h5{
+        margin-top: 16px;
+        font-weight: 800;
+        color: var(--primary);
+    }
+
+    .choose-card p{
+        color: var(--text-soft);
+        font-size: 14px;
+        line-height: 1.7;
+        margin-bottom: 0;
+    }
+
+    .stats-card{
+        text-align: center;
+        padding: 28px 20px;
+        border-radius: 20px;
+        background: var(--white);
+        box-shadow: var(--shadow);
+        height: 100%;
+        transition: 0.35s ease;
+    }
+
+    .stats-card:hover{
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-hover);
+    }
+
+    .stats-card h3{
+        font-size: 34px;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 8px;
+    }
+
+    .stats-card p{
+        margin-bottom: 0;
+        color: var(--text-soft);
+        font-size: 14px;
+    }
+
+    .testimonial-card{
+        border: none;
+        border-radius: 22px;
+        background: linear-gradient(135deg, var(--white), var(--bg-soft));
+        box-shadow: var(--shadow);
+        padding: 28px 24px;
+        height: 100%;
+        transition: 0.35s ease;
+    }
+
+    .testimonial-card:hover{
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-hover);
+    }
+
+    .testimonial-card p{
+        color: var(--text-dark);
+        line-height: 1.8;
+        margin-bottom: 18px;
+        font-size: 15px;
+    }
+
+    .testimonial-card h6{
+        color: var(--danger-soft);
+        font-weight: 800;
+        margin-bottom: 0;
+    }
+
+    .cta-section{
+        padding: 20px 0 80px;
+    }
+
+    .cta-box{
+        background: linear-gradient(135deg, var(--primary), #177086);
+        border-radius: 28px;
+        padding: 55px 30px;
+        text-align: center;
+        color: white;
+        box-shadow: var(--shadow-hover);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta-box::before{
+        content: "";
+        position: absolute;
+        width: 240px;
+        height: 240px;
+        background: rgba(255,255,255,0.08);
+        border-radius: 50%;
+        top: -60px;
+        right: -60px;
+    }
+
+    .cta-box::after{
+        content: "";
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        background: rgba(255,255,255,0.06);
+        border-radius: 50%;
+        bottom: -50px;
+        left: -50px;
+    }
+
+    .cta-box h2{
+        position: relative;
+        z-index: 1;
+        font-size: 2.3rem;
+        font-weight: 800;
+        margin-bottom: 14px;
+    }
+
+    .cta-box p{
+        position: relative;
+        z-index: 1;
+        max-width: 760px;
+        margin: 0 auto 24px;
+        line-height: 1.8;
+        color: #eefbff;
+    }
+
+    #chatbot{
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 300px;
+        background: white;
+        border-radius: 14px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        z-index: 999;
+    }
+
+    #chat-header{
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        padding: 10px;
+        text-align: center;
+    }
+
+    #chat-body{
+        height: 250px;
+        overflow-y: auto;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    #chat-input{
+        width: 100%;
+        border: none;
+        padding: 10px;
+        border-top: 1px solid #ddd;
+    }
+
+    @media(max-width: 991px){
+        .bimg{
+            height: 560px;
+        }
+
+        .btitle{
+            font-size: 50px;
+        }
+
+        .bcaption{
+            font-size: 18px;
+        }
+    }
+
+    @media(max-width: 768px){
+        .bimg{
+            height: 460px;
+        }
+
+        .btitle{
+            font-size: 34px;
+        }
+
+        .bcaption{
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .hero-btns{
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-overlay{
+            transform: translateY(0);
+            background: linear-gradient(to top, rgba(15,76,92,0.92), rgba(0,0,0,0.18));
+        }
+
+        .place-card img{
+            height: 270px;
+        }
+
+        .section-title{
+            font-size: 1.8rem;
+        }
+
+        .cta-box h2{
+            font-size: 1.8rem;
+        }
+    }
+</style>
+
+{% include 'hf/nav.html' %}
+
+<section class="hero-section">
+    <div id="carouselExampleIndicators" class="carousel slide hero-banner mx-auto" data-bs-ride="carousel">
+        <div class="carousel-inner">
+
+            {% for x in ba %}
+                {% if x.image %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <img src="{{ x.image.url }}" class="bimg d-block w-100" alt="Travel Banner">
+                    <div class="hero-content">
+                        <div class="hero-inner">
+                            <span class="hero-badge">Discover Premium Tamil Nadu Travel</span>
+                            <h1 class="btitle">Explore Tamil Nadu With Elegance</h1>
+                            <p class="bcaption">
+                                Travel through scenic hills, beaches, heritage temples, and unforgettable
+                                destinations with comfort, beauty, and premium experiences.
+                            </p>
+                            <div class="hero-btns">
+                                <a href="{% url 'destination' %}" class="btn-main">Explore Packages</a>
+                                <a href="{% url 'contact' %}" class="btn-outline-main">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if x.image1 %}
+                <div class="carousel-item">
+                    <img src="{{ x.image1.url }}" class="bimg d-block w-100" alt="Best Places">
+                    <div class="addbanner2">
+                        <div class="hero-inner">
+                            <span class="hero-badge">Best Destinations</span>
+                            <h2 class="btitle">Best Place To Visit In Tamil Nadu</h2>
+                            <p class="bcaption">
+                                Pack your bags and begin your journey through Tamil Nadu’s most beautiful
+                                hills, temples, beaches, and cultural heritage places.
+                            </p>
+                            <div class="hero-btns">
+                                <a href="{% url 'destination' %}" class="btn-main">View Destinations</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if x.image2 %}
+                <div class="carousel-item">
+                    <img src="{{ x.image2.url }}" class="bimg d-block w-100" alt="Travel Without Limits">
+                    <div class="addbanner3">
+                        <div class="hero-inner">
+                            <span class="hero-badge">Luxury • Comfort • Adventure</span>
+                            <h2 class="btitle">Travel Without Limits</h2>
+                            <p class="bcaption">
+                                Explore unforgettable destinations with elegant travel experiences,
+                                trusted guidance, and memorable adventures.
+                            </p>
+                            <div class="hero-btns">
+                                <a href="{% url 'destination' %}" class="btn-main">Start Journey</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+</section>
+
+<div class="travel-types">
+    <div class="container">
+        <h2 class="section-title">Travel Categories</h2>
+        <p class="section-subtitle">
+            Choose the perfect travel style for your next adventure and enjoy a more personalized experience.
+        </p>
+
+        <div class="row text-center g-3 justify-content-center">
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="type-card">
+                    <i class="bi bi-geo-alt"></i>
+                    <h6>Popular Destinations</h6>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="type-card">
+                    <i class="bi bi-compass"></i>
+                    <h6>Your Choice</h6>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="type-card">
+                    <i class="bi bi-sun"></i>
+                    <h6>Holiday</h6>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="type-card">
+                    <i class="bi bi-tree"></i>
+                    <h6>Adventure</h6>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="type-card">
+                    <i class="bi bi-heart"></i>
+                    <h6>Honeymoon</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="container my-5">
+    <h2 class="section-title">Popular Places in Tamil Nadu</h2>
+    <p class="section-subtitle">
+        Experience scenic landscapes, cool weather, heritage beauty, and world-famous cultural landmarks.
+    </p>
+
+    <div class="row g-4 justify-content-center">
+
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div id="travelCarousel1" class="place-card carousel slide" data-bs-ride="carousel">
+                <span class="place-badge">Hill Station</span>
+                <div class="carousel-inner">
+                    {% for y in timg %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ y.pd.url }}" class="d-block w-100" alt="Ooty Hills">
+                        <div class="image-overlay">
+                            <h3>Ooty Hills</h3>
+                            <p>Queen of Hill Stations with cool weather, green valleys, and scenic beauty.</p>
+                            <a href="{% url 'destination' %}" class="mini-btn">Explore More</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div id="travelCarousel2" class="place-card carousel slide" data-bs-ride="carousel">
+                <span class="place-badge">Nature Escape</span>
+                <div class="carousel-inner">
+                    {% for y in timg %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ y.hs.url }}" class="d-block w-100" alt="Kodaikanal">
+                        <div class="image-overlay">
+                            <h3>Kodaikanal</h3>
+                            <p>Beautiful lakes, forest views, fresh air, and relaxing romantic vibes.</p>
+                            <a href="{% url 'destination' %}" class="mini-btn">Explore More</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div id="travelCarousel3" class="place-card carousel slide" data-bs-ride="carousel">
+                <span class="place-badge">Heritage</span>
+                <div class="carousel-inner">
+                    {% for y in timg %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ y.tt.url }}" class="d-block w-100" alt="Thanjavur Temple">
+                        <div class="image-overlay">
+                            <h3>Thanjavur Temple</h3>
+                            <p>UNESCO heritage beauty with timeless Tamil architecture and culture.</p>
+                            <a href="{% url 'destination' %}" class="mini-btn">Explore More</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div id="travelCarousel4" class="place-card carousel slide" data-bs-ride="carousel">
+                <span class="place-badge">Historic Shore</span>
+                <div class="carousel-inner">
+                    {% for y in timg %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ y.ht.url }}" class="d-block w-100" alt="Mahabalipuram">
+                        <div class="image-overlay">
+                            <h3>Mahabalipuram</h3>
+                            <p>Stone-carved history, sea breeze, and one of Tamil Nadu’s iconic sites.</p>
+                            <a href="{% url 'destination' %}" class="mini-btn">Explore More</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="container my-5">
+    <div class="row g-4">
+        <div class="col-md-3">
+            <div class="stats-card">
+                <h3>50+</h3>
+                <p>Premium Destinations</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card">
+                <h3>10K+</h3>
+                <p>Happy Travelers</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card">
+                <h3>24/7</h3>
+                <p>Support Service</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card">
+                <h3>100%</h3>
+                <p>Memorable Experience</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="premium-section">
+    <div class="container">
+        <h2 class="section-title">Why Choose UD-Traveler</h2>
+        <p class="section-subtitle">
+            We make travel simple, attractive, and premium with better support, clean design, and unforgettable experiences.
+        </p>
+
+        <div class="row g-4 text-center">
+
+            <div class="col-md-3">
+                <div class="choose-card">
+                    <i class="bi bi-globe"></i>
+                    <h5>Premium Destinations</h5>
+                    <p>Explore Tamil Nadu’s most beautiful places with comfort, style, and memorable service.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="choose-card">
+                    <i class="bi bi-cash-stack"></i>
+                    <h5>Best Price</h5>
+                    <p>Affordable packages with excellent value for couples, families, and group travelers.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="choose-card">
+                    <i class="bi bi-person-check"></i>
+                    <h5>Expert Support</h5>
+                    <p>Friendly assistance and guided help to make your travel planning easy and smooth.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="choose-card">
+                    <i class="bi bi-headset"></i>
+                    <h5>24/7 Help</h5>
+                    <p>We support your bookings and travel questions anytime you need help.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="container my-5 py-4">
+    <h2 class="section-title">What Travelers Say</h2>
+    <p class="section-subtitle">
+        Happy travelers trust UD-Traveler for comfort, smooth booking, and unforgettable travel memories.
+    </p>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="testimonial-card">
+                <p>"Amazing travel experience! Everything was beautifully organized and very comfortable."</p>
+                <h6>– Rahul</h6>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="testimonial-card">
+                <p>"The destinations were stunning and the service felt premium from start to finish."</p>
+                <h6>– Priya</h6>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="testimonial-card">
+                <p>"One of the best travel websites I have used. Clean UI and smooth booking experience."</p>
+                <h6>– Arjun</h6>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-box">
+            <h2>Ready To Start Your Tamil Nadu Journey?</h2>
+            <p>
+                Discover beautiful destinations, premium comfort, and a smooth booking experience
+                with UD-Traveler today.
+            </p>
+            <a href="{% url 'destination' %}" class="btn-main">Book Your Next Trip</a>
+        </div>
+    </div>
+</section>
+
+{% include 'chatbot.html' %}
+
+{% endblock %}

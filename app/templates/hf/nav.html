@@ -1,0 +1,285 @@
+<style>
+    .tn-navbar {
+        background: rgba(15, 76, 92, 0.92);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        box-shadow: 0 8px 24px rgba(15, 76, 92, 0.20);
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(233, 160, 59, 0.25);
+    }
+
+    .tn-logo {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: #ffffff !important;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .logo-icon {
+        font-size: 1.2rem;
+    }
+
+    .tn-nav-links .nav-link {
+        color: #eaf7fb !important;
+        font-weight: 600;
+        margin: 0 10px;
+        position: relative;
+        transition: 0.3s ease;
+    }
+
+    .tn-nav-links .nav-link:hover {
+        color: #FFD166 !important;
+    }
+
+    .tn-nav-links .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(to right, #E9A03B, #FFD166);
+        transition: width 0.3s ease;
+        border-radius: 10px;
+    }
+
+    .tn-nav-links .nav-link:hover::after {
+        width: 100%;
+    }
+
+    .tn-nav-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .tn-search-box {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.10);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 30px;
+        padding: 8px 14px;
+        min-width: 240px;
+    }
+
+    .tn-search-box i {
+        color: #FFD166;
+        margin-right: 8px;
+        font-size: 14px;
+    }
+
+    .tn-search-box input {
+        border: none;
+        outline: none;
+        background: transparent;
+        color: white;
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .tn-search-box input::placeholder {
+        color: rgba(255, 255, 255, 0.72);
+    }
+
+    .tn-mybooking-btn {
+        padding: 10px 18px;
+        border-radius: 30px;
+        text-decoration: none;
+        color: white;
+        font-weight: 700;
+        background: linear-gradient(135deg, #0F4C5C, #177086);
+        border: 1px solid rgba(255,255,255,0.18);
+        box-shadow: 0 8px 18px rgba(15, 76, 92, 0.25);
+        transition: 0.3s ease;
+    }
+
+    .tn-mybooking-btn:hover {
+        color: white;
+        transform: translateY(-2px);
+        background: linear-gradient(135deg, #177086, #0F4C5C);
+    }
+
+    .tn-login-btn {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: none;
+        background: linear-gradient(135deg, #E9A03B, #FFD166);
+        color: #5a3a00;
+        font-weight: 800;
+        box-shadow: 0 8px 18px rgba(233, 160, 59, 0.35);
+    }
+
+    .tn-book-btn {
+        padding: 10px 18px;
+        border-radius: 30px;
+        text-decoration: none;
+        color: #5a3a00;
+        font-weight: 800;
+        background: linear-gradient(135deg, #E9A03B, #FFD166);
+        box-shadow: 0 10px 20px rgba(233, 160, 59, 0.34);
+        transition: 0.3s ease;
+    }
+
+    .tn-book-btn:hover {
+        background: linear-gradient(135deg, #0F4C5C, #177086);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .tn-dropdown {
+        border: none;
+        border-radius: 16px;
+        padding: 10px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        background: #ffffff;
+    }
+
+    .tn-dropdown .dropdown-item {
+        border-radius: 10px;
+        padding: 10px 12px;
+        color: #35515b;
+        font-weight: 500;
+    }
+
+    .tn-dropdown .dropdown-item:hover {
+        background: #eef7fa;
+        color: #0F4C5C;
+    }
+
+    .tn-toggler {
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        background: rgba(255, 255, 255, 0.08);
+        padding: 6px 10px;
+        border-radius: 10px;
+    }
+
+    .tn-toggler .navbar-toggler-icon {
+        filter: brightness(0) invert(1);
+    }
+
+    @media (max-width: 991px) {
+        .tn-nav-right {
+            margin-top: 15px;
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .tn-search-box {
+            min-width: 100%;
+        }
+
+        .tn-book-btn,
+        .tn-mybooking-btn {
+            text-align: center;
+        }
+
+        .tn-nav-links .nav-link {
+            margin: 8px 0;
+        }
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg tn-navbar fixed-top">
+    <div class="container">
+
+        <a class="navbar-brand tn-logo" href="{% url 'home' %}">
+            <span class="logo-icon">🌴</span> UD-Traveler
+        </a>
+
+        <button class="navbar-toggler tn-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+
+            <ul class="navbar-nav mx-auto tn-nav-links">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'destination' %}">Destinations</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'gallery' %}">Gallery</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                </li>
+            </ul>
+
+            <div class="tn-nav-right">
+                <form method="get" action="{% url 'destination' %}" class="tn-search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" name="search" placeholder="Search destinations..." value="{{ request.GET.search }}">
+                </form>
+
+                {% if user.is_authenticated and not user.is_superuser %}
+                <a href="{% url 'booking_history' %}" class="tn-mybooking-btn">
+                    Your Bookings
+                </a>
+               
+                {% else %}
+                <a href="{% url 'login' %}" class="tn-book-btn">
+                    Book Now
+                </a>
+                {% endif %}
+
+                <div class="dropdown">
+                    <button class="tn-login-btn dropdown-toggle" data-bs-toggle="dropdown">
+                        {% if user.is_authenticated and not user.is_superuser %}
+                            {{ user.username|slice:":1"|upper }}
+                        {% else %}
+                            <i class="bi bi-person"></i>
+                        {% endif %}
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-menu-end tn-dropdown">
+                        {% if user.is_authenticated and not user.is_superuser %}
+                        <li class="dropdown-item text-center fw-bold">
+                            👋 Welcome {{ user.username }}
+                        </li>
+
+                        <li><hr class="dropdown-divider"></li>
+
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li>
+                            <form method="post" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="dropdown-item">
+                                    Logout
+                                </button>
+                            </form>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a class="dropdown-item" href="{% url 'login' %}">
+                                <i class="bi bi-box-arrow-in-right"></i> Login
+                            </a>
+                        </li>
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li>
+                            <a class="dropdown-item" href="{% url 'register' %}">
+                                <i class="bi bi-person-plus"></i> Register
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</nav>

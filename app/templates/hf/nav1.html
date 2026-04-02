@@ -1,0 +1,340 @@
+<nav class="navbar navbar-expand-lg tn-navbar fixed-top">
+    <div class="container">
+
+        <a class="navbar-brand tn-logo" href="{% url 'home' %}">
+            <span class="logo-icon">🌴</span> UD-Traveler
+        </a>
+
+        <button class="navbar-toggler tn-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+
+            <ul class="navbar-nav mx-auto tn-nav-links">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+
+                <li class="nav-item dropdown position-relative">
+                    <a class="nav-link dropdown-toggle tn-dropdown-toggle" href="#" role="button">
+                        Destinations
+                    </a>
+
+                    <div class="travel-dropdown">
+                        <a href="{% url 'destination' %}?type=all" class="travel-item">🌍 All Destinations</a>
+                        <a href="{% url 'destination' %}?type=hill" class="travel-item">🏔 Hill Stations</a>
+                        <a href="{% url 'destination' %}?type=beach" class="travel-item">🏖 Beaches</a>
+                        <a href="{% url 'destination' %}?type=temple" class="travel-item">🛕 Temples</a>
+                        <a href="{% url 'destination' %}?type=trek" class="travel-item">🥾 Trekking</a>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'gallery' %}">Gallery</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                </li>
+
+            </ul>
+
+            <div class="tn-nav-right">
+
+                {% if user.is_authenticated and not user.is_superuser %}
+                <a href="" class="tn-mybooking-btn">
+                    Your Bookings
+                </a>
+
+                
+                {% else %}
+                <a href="{% url 'login' %}" class="tn-book-btn">
+                    Book Now
+                </a>
+                {% endif %}
+
+                <div class="dropdown">
+                    <button class="tn-login-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        {% if user.is_authenticated and not user.is_superuser %}
+                            {{ user.username|slice:":1"|upper }}
+                        {% else %}
+                            <i class="bi bi-person"></i>
+                        {% endif %}
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-menu-end tn-user-dropdown">
+                        {% if user.is_authenticated and not user.is_superuser %}
+
+                        <li class="dropdown-item text-center fw-bold">
+                            👋 Welcome {{ user.username }}
+                        </li>
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li>
+                            <a class="dropdown-item" href="">
+                                <i class="bi bi-card-checklist"></i> Your Bookings
+                            </a>
+                        </li>
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li>
+                            <form method="post" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="dropdown-item">
+                                    Logout
+                                </button>
+                            </form>
+                        </li>
+
+                        {% else %}
+
+                        <li>
+                            <a class="dropdown-item" href="{% url 'login' %}">
+                                <i class="bi bi-box-arrow-in-right"></i> Login
+                            </a>
+                        </li>
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li>
+                            <a class="dropdown-item" href="{% url 'register' %}">
+                                <i class="bi bi-person-plus"></i> Register
+                            </a>
+                        </li>
+
+                        {% endif %}
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+<style>
+    .tn-navbar {
+        background: rgba(15, 76, 92, 0.92);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid rgba(233, 160, 59, 0.30);
+        box-shadow: 0 8px 24px rgba(15, 76, 92, 0.25);
+        padding: 12px 0;
+    }
+
+    .tn-logo {
+        font-size: 1.65rem;
+        font-weight: 800;
+        color: #ffffff !important;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+    }
+
+    .logo-icon {
+        font-size: 1.2rem;
+    }
+
+    .tn-nav-links .nav-link {
+        color: #eaf7fb !important;
+        font-weight: 600;
+        margin: 0 10px;
+        position: relative;
+        transition: 0.3s ease;
+    }
+
+    .tn-nav-links .nav-link:hover,
+    .tn-dropdown-toggle:hover {
+        color: #FFD166 !important;
+    }
+
+    .tn-nav-links .nav-link::after,
+    .tn-dropdown-toggle::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(to right, #E9A03B, #FFD166);
+        transition: width 0.3s ease;
+        border-radius: 10px;
+    }
+
+    .tn-nav-links .nav-link:hover::after,
+    .nav-item.dropdown:hover .tn-dropdown-toggle::after {
+        width: 100%;
+    }
+
+    .tn-nav-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .tn-mybooking-btn {
+        padding: 10px 16px;
+        border-radius: 30px;
+        text-decoration: none;
+        color: white;
+        font-weight: 700;
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        box-shadow: 0 8px 18px rgba(15, 76, 92, 0.18);
+        transition: 0.3s ease;
+    }
+
+    .tn-mybooking-btn:hover {
+        background: rgba(255, 255, 255, 0.24);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .tn-login-btn {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: none;
+        background: linear-gradient(135deg, #E9A03B, #FFD166);
+        color: #5a3a00;
+        font-weight: 800;
+        box-shadow: 0 8px 18px rgba(233, 160, 59, 0.35);
+        transition: 0.3s ease;
+    }
+
+    .tn-login-btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .tn-book-btn {
+        padding: 10px 18px;
+        border-radius: 30px;
+        text-decoration: none;
+        color: #5a3a00;
+        font-weight: 800;
+        background: linear-gradient(135deg, #E9A03B, #FFD166);
+        box-shadow: 0 10px 20px rgba(233, 160, 59, 0.34);
+        transition: 0.3s ease;
+    }
+
+    .tn-book-btn:hover {
+        background: linear-gradient(135deg, #0F4C5C, #177086);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .tn-user-dropdown {
+        border: none;
+        border-radius: 16px;
+        padding: 10px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        background: #ffffff;
+    }
+
+    .tn-user-dropdown .dropdown-item {
+        border-radius: 10px;
+        padding: 10px 12px;
+        color: #35515b;
+        font-weight: 500;
+        transition: 0.25s ease;
+    }
+
+    .tn-user-dropdown .dropdown-item:hover {
+        background: #eef7fa;
+        color: #0F4C5C;
+    }
+
+    .travel-dropdown {
+        position: absolute;
+        top: 120%;
+        left: 0;
+        min-width: 240px;
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 12px;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+        z-index: 999;
+        border: 1px solid rgba(15, 76, 92, 0.10);
+    }
+
+    .nav-item.dropdown:hover .travel-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .travel-item {
+        display: block;
+        text-decoration: none;
+        padding: 12px 14px;
+        border-radius: 12px;
+        color: #35515b;
+        font-weight: 600;
+        transition: all 0.25s ease;
+        margin-bottom: 6px;
+    }
+
+    .travel-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .travel-item:hover {
+        background: #eef7fa;
+        color: #0F4C5C;
+        transform: translateX(4px);
+    }
+
+    .tn-toggler {
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.08);
+        padding: 6px 10px;
+        border-radius: 10px;
+    }
+
+    .tn-toggler .navbar-toggler-icon {
+        filter: brightness(0) invert(1);
+    }
+
+    @media (max-width: 991px) {
+        .tn-nav-right {
+            margin-top: 15px;
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .tn-book-btn,
+        .tn-mybooking-btn {
+            text-align: center;
+        }
+
+        .tn-nav-links .nav-link {
+            margin: 8px 0;
+        }
+
+        .travel-dropdown {
+            position: static;
+            opacity: 1;
+            visibility: visible;
+            transform: none;
+            min-width: 100%;
+            margin-top: 10px;
+            display: none;
+            border-radius: 14px;
+        }
+
+        .nav-item.dropdown:hover .travel-dropdown {
+            display: block;
+        }
+    }
+</style>

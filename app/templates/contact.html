@@ -1,0 +1,365 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<style>
+    :root {
+        --primary: #0A2540;
+        --primary-dark: #061726;
+        --primary-light: #1E90FF;
+        --secondary: #00BFA6;
+        --accent: #38B6FF;
+        --gold: #FFD166;
+        --white: #ffffff;
+        --text-soft: #eaf6ff;
+        --body-bg: linear-gradient(135deg, #f4fbff, #e9f6ff, #f8fcff);
+        --card-bg: rgba(255, 255, 255, 0.94);
+        --shadow: 0 20px 45px rgba(10, 37, 64, 0.14);
+    }
+
+    body {
+        background: var(--body-bg);
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .contact-banner {
+        height: 360px;
+        background:
+            linear-gradient(rgba(10, 37, 64, 0.65), rgba(10, 37, 64, 0.78)),
+            url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+        position: relative;
+        overflow: hidden;
+        border-radius: 0 0 30px 30px;
+    }
+
+    .banner-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+        z-index: 2;
+        width: 90%;
+        max-width: 850px;
+    }
+
+    .banner-badge {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.14);
+        color: var(--gold);
+        padding: 8px 18px;
+        border-radius: 30px;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.4px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        backdrop-filter: blur(8px);
+        margin-bottom: 16px;
+    }
+
+    .banner-text h1 {
+        font-size: 3.4rem;
+        font-weight: 800;
+        color: var(--white);
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    .banner-text h1 span {
+        color: var(--gold);
+    }
+
+    .banner-text p {
+        font-size: 1.08rem;
+        color: var(--text-soft);
+        margin-bottom: 0;
+    }
+
+    .contact-section {
+        margin-top: 70px;
+        position: relative;
+        z-index: 3;
+    }
+
+    .contact-card {
+        background: var(--card-bg);
+        border: none;
+        border-radius: 24px;
+        padding: 32px;
+        min-height: 560px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+    }
+
+    .card-title {
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 8px;
+        font-size: 28px;
+    }
+
+    .card-subtitle {
+        color: #688095;
+        font-size: 14px;
+        margin-bottom: 24px;
+        line-height: 1.7;
+    }
+
+    .form-control {
+        border-radius: 14px;
+        padding: 13px 15px;
+        border: 1px solid #d7e9f8;
+        background: #f8fcff;
+        box-shadow: none !important;
+        color: #22384b;
+    }
+
+    .form-control::placeholder {
+        color: #88a0b3;
+    }
+
+    .form-control:focus {
+        border-color: var(--primary-light);
+        background: white;
+        box-shadow: 0 0 0 4px rgba(30, 144, 255, 0.12) !important;
+    }
+
+    textarea.form-control {
+        resize: none;
+    }
+
+    .contact-btn {
+        background: linear-gradient(135deg, var(--primary-light), var(--accent));
+        border: none;
+        color: white;
+        border-radius: 30px;
+        padding: 12px 28px;
+        font-weight: 700;
+        box-shadow: 0 12px 28px rgba(30, 144, 255, 0.22);
+        transition: 0.3s;
+    }
+
+    .contact-btn:hover {
+        transform: translateY(-2px);
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+    }
+
+    .info-card {
+        background: linear-gradient(145deg, var(--primary), var(--primary-dark));
+        color: white;
+    }
+
+    .info-header {
+        margin-bottom: 26px;
+    }
+
+    .info-header h4 {
+        font-weight: 800;
+        margin-bottom: 8px;
+        font-size: 28px;
+        color: white;
+    }
+
+    .info-header p {
+        color: rgba(234, 246, 255, 0.9);
+        margin-bottom: 0;
+        line-height: 1.7;
+    }
+
+    .info-box {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 16px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .info-box:last-child {
+        border-bottom: none;
+    }
+
+    .info-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-shrink: 0;
+        color: var(--gold);
+    }
+
+    .info-content h5 {
+        margin-bottom: 4px;
+        font-weight: 800;
+        color: var(--gold);
+    }
+
+    .info-content p {
+        margin-bottom: 0;
+        color: var(--text-soft);
+        line-height: 1.7;
+    }
+
+    .map-box {
+        margin-top: 35px;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 18px 40px rgba(10, 37, 64, 0.14);
+        border: 4px solid rgba(255, 255, 255, 0.7);
+    }
+
+    iframe {
+        width: 100%;
+        height: 340px;
+        border: none;
+    }
+
+    .alert-success {
+        border-radius: 14px;
+        border: none;
+        background: #ecfdf3;
+        color: #166534;
+        font-weight: 600;
+    }
+
+    @media (max-width: 991px) {
+        .banner-text h1 {
+            font-size: 2.6rem;
+        }
+
+        .contact-card {
+            min-height: auto;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .banner-text h1 {
+            font-size: 2rem;
+        }
+
+        .banner-text p {
+            font-size: 0.95rem;
+        }
+
+        .contact-card {
+            padding: 24px 18px;
+        }
+
+        .card-title,
+        .info-header h4 {
+            font-size: 24px;
+        }
+    }
+</style>
+
+{% include 'hf/nav2.html' %}
+
+<section class="contact-banner ">
+    <div class="banner-text">
+        <div class="banner-badge">Premium Travel Support</div>
+        <h1>Contact <span>Us</span></h1>
+        <p>We would love to hear from you and help plan your perfect Tamil Nadu journey.</p>
+    </div>
+</section>
+
+<section class="container contact-section pb-5">
+    <div class="row g-4">
+
+        <div class="col-lg-6">
+            <div class="contact-card">
+                <h4 class="card-title">Send Message</h4>
+                <p class="card-subtitle">
+                    Share your travel questions, booking needs, or support requests with us.
+                </p>
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-success mb-3">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    <input type="text" name="name" class="form-control mb-3" placeholder="Your Name" required>
+
+                    <input type="email" name="email" class="form-control mb-3" placeholder="Your Email" required>
+
+                    <input type="text" name="phone" class="form-control mb-3" placeholder="Your Phone" required>
+
+                    <textarea name="message" rows="6" class="form-control mb-4" placeholder="Your Message"
+                        required></textarea>
+
+                    <button class="contact-btn" type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="contact-card info-card">
+                <div class="info-header">
+                    <h4>Get In Touch</h4>
+                    <p>Reach us for premium travel assistance, tour details, and booking support.</p>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-icon">
+                        <i class="bi bi-geo-alt"></i>
+                    </div>
+                    <div class="info-content">
+                        <h5>Location</h5>
+                        <p>Tamil Nadu, India</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-icon">
+                        <i class="bi bi-telephone"></i>
+                    </div>
+                    <div class="info-content">
+                        <h5>Phone</h5>
+                        <p>+91 63835 59277</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-icon">
+                        <i class="bi bi-envelope"></i>
+                    </div>
+                    <div class="info-content">
+                        <h5>Email</h5>
+                        <p>udtravel005@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-icon">
+                        <i class="bi bi-clock"></i>
+                    </div>
+                    <div class="info-content">
+                        <h5>Support Hours</h5>
+                        <p>Monday to Sunday — 24/7 Travel Assistance</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="map-box">
+
+        <iframe src="https://maps.google.com/maps?q= Tamil Nadu, India&z=12&output=embed" width="100%" height="350"
+            loading="lazy" allowfullscreen>
+        </iframe>
+
+    </div>
+</section>
+
+{% endblock %}

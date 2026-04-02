@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UD-Traveler | Info Pages</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0f2027;
+      --mid: #203a43;
+      --teal: #2c5364;
+      --cyan: #00c6ff;
+      --blue: #0072ff;
+      --white: #ffffff;
+      --light: #f4f7fb;
+      --muted: #6b7a8d;
+      --border: #e0e8f0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--light);
+      color: #1a1a2e;
+    }
+
+    /* ── TABS ── */
+    .tabs-wrapper {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%);
+      padding: 60px 60px 0;
+      text-align: center;
+    }
+
+    .tabs-wrapper h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .tabs-wrapper p {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 16px;
+      margin-bottom: 36px;
+    }
+
+    .tabs {
+      display: inline-flex;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      padding: 6px;
+      gap: 4px;
+    }
+
+    .tab-btn {
+      padding: 12px 32px;
+      border-radius: 40px;
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.7);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: var(--white);
+      box-shadow: 0 4px 20px rgba(0, 198, 255, 0.35);
+    }
+
+    .tab-btn:hover:not(.active) {
+      color: var(--white);
+    }
+
+    /* ── CONTENT ── */
+    .content-area {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 40px 100px;
+    }
+
+    .page {
+      display: none;
+      animation: fadeUp 0.5s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── HERO BANNER for each page ── */
+    .page-banner {
+      border-radius: 20px;
+      overflow: hidden;
+      height: 280px;
+      position: relative;
+      margin-bottom: 50px;
+    }
+
+    .page-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .page-banner .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(15, 32, 39, 0.75), rgba(0, 114, 255, 0.4));
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 36px 40px;
+    }
+
+    .page-banner .overlay span {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 8px;
+    }
+
+    .page-banner .overlay h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 38px;
+      color: var(--white);
+    }
+
+    /* ── CARDS GRID ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .info-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 30px;
+      border: 1px solid var(--border);
+      transition: box-shadow 0.3s, transform 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--cyan), var(--blue));
+      border-radius: 4px 0 0 4px;
+    }
+
+    .info-card:hover {
+      box-shadow: 0 12px 40px rgba(0, 114, 255, 0.12);
+      transform: translateY(-4px);
+    }
+
+    .info-card .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #e8f4ff, #cce7ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 18px;
+    }
+
+    .info-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: var(--navy);
+    }
+
+    .info-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── STEPS ── */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 40px;
+    }
+
+    .step {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      padding: 28px 30px;
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+      transition: box-shadow 0.3s;
+    }
+
+    .step:hover {
+      box-shadow: 0 8px 30px rgba(0, 114, 255, 0.1);
+    }
+
+    .step-num {
+      min-width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: var(--white);
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px rgba(0, 198, 255, 0.3);
+    }
+
+    .step-body h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .step-body p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── SECTION HEADING ── */
+    .sec-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: var(--navy);
+      margin: 40px 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sec-heading::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--border), transparent);
+    }
+
+    /* ── POLICY SECTION ── */
+    .policy-block {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 30px 36px;
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .policy-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: var(--navy);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .policy-block p,
+    .policy-block li {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .policy-block ul {
+      padding-left: 20px;
+    }
+
+    .policy-block ul li {
+      margin-bottom: 8px;
+    }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight {
+      background: linear-gradient(135deg, #e8f4ff, #f0f8ff);
+      border: 1px solid #b3d9ff;
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .highlight .hi-icon {
+      font-size: 28px;
+    }
+
+    .highlight h4 {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .highlight p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── TABLE ── */
+    .styled-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-bottom: 30px;
+    }
+
+    .styled-table th {
+      background: linear-gradient(90deg, var(--navy), var(--teal));
+      color: var(--white);
+      padding: 16px 20px;
+      text-align: left;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .styled-table td {
+      padding: 14px 20px;
+      font-size: 14px;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .styled-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .styled-table tr:nth-child(even) td {
+      background: #fafcff;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .badge-green {
+      background: #d4f5e2;
+      color: #1a7a45;
+    }
+
+    .badge-red {
+      background: #fde8e8;
+      color: #c0392b;
+    }
+
+    .badge-yellow {
+      background: #fef3d4;
+      color: #a07800;
+    }
+
+  
+        /* Footer */
+        .travel-footer {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: white;
+            padding: 60px 0 20px;
+            margin-top: 80px;
+        }
+
+        .footer-container {
+            width: 90%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-logo {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .footer-col h3 {
+            margin-bottom: 15px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col ul li {
+            margin: 10px 0;
+        }
+
+        .footer-col ul li a {
+            text-decoration: none;
+            color: #ddd;
+            transition: 0.3s;
+        }
+
+        /* Link Hover Animation */
+        .footer-col ul li a:hover {
+            color: #00e5ff;
+            padding-left: 8px;
+        }
+
+        /* Social Icons */
+        .social-icons a {
+            font-size: 22px;
+            margin-right: 15px;
+            color: white;
+            transition: 0.4s;
+        }
+
+        .social-icons a:hover {
+            color: #00e5ff;
+            transform: translateY(-6px) scale(1.2);
+        }
+
+        /* Bottom */
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 15px;
+        }
+  </style>
+</head>
+
+<body>
+
+  
+
+  <!-- TABS HEADER -->
+  <div class="tabs-wrapper">
+    <h1>Help & Information</h1>
+    <p>Everything you need to know before your journey begins</p>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="showTab('booking')">📋 Booking Info</button>
+      <button class="tab-btn" onclick="showTab('privacy')">🔒 Privacy Policy</button>
+      <button class="tab-btn" onclick="showTab('terms')">📄 Terms & Conditions</button>
+    </div>
+  </div>
+
+
+
+
+  </div><!-- /content-area -->
+
+    <!-- Footer -->
+    <footer class="travel-footer">
+
+        <div class="footer-container">
+
+            <!-- Brand Section -->
+            <div class="footer-col">
+                <h2 class="footer-logo">UD-Traveler</h2>
+                <p>Explore the world with us. Discover beautiful destinations, unforgettable adventures, and unique
+                    travel experiences.</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Destinations</a></li>
+                    <li><a href="#">Packages</a></li>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Support -->
+            <div class="footer-col">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#booking">Booking Info</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms</a></li>
+                </ul>
+            </div>
+
+            <!-- Social -->
+            <div class="footer-col">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 UD-Traveler | Designed by balaji</p>
+        </div>
+
+    </footer>
+
+
+    <script>
+        function showTab(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            const map = { booking: 0, privacy: 1, terms: 2 };
+            document.querySelectorAll('.tab-btn')[map[id]].classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+
+</html>

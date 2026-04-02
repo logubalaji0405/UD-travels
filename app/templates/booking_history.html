@@ -1,0 +1,121 @@
+{% extends 'main.html' %}
+{% block content %}
+
+{% include 'hf/nav2.html' %}
+
+<style>
+    body {
+        background: #f4f8ff;
+    }
+
+    .history-section {
+        padding: 120px 0 60px;
+    }
+
+    .history-title {
+        text-align: center;
+        font-weight: 800;
+        color: #0d47a1;
+        margin-bottom: 30px;
+    }
+
+    .history-card {
+        border: none;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        background: #fff;
+    }
+
+    .table thead {
+        background: linear-gradient(135deg, #0d6efd, #2563eb);
+        color: white;
+    }
+
+    .table th, .table td {
+        padding: 14px;
+        vertical-align: middle;
+    }
+
+    .status-badge {
+        background: #22c55e;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .btn-statement {
+        text-decoration: none;
+        padding: 8px 14px;
+        border-radius: 10px;
+        background: #0d6efd;
+        color: white;
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .btn-statement:hover {
+        color: white;
+    }
+</style>
+
+<div class="container history-section">
+    <h2 class="history-title">Your Booking History</h2>
+
+    <div class="card history-card">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Destination</th>
+                            <th>Duration</th>
+                            <th>Vehicle</th>
+                            <th>Guests</th>
+                            <th>Total</th>
+                            <th>Payment</th>
+                            <th>Statement</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for b in bookings %}
+                        <tr>
+                            <td>{{ b.id }}</td>
+                            <td>{{ b.destination }}</td>
+                            <td>{{ b.duration }}</td>
+                            <td>{{ b.vehicle_type }}</td>
+                            <td>{{ b.guests }}</td>
+                            <td>₹{{ b.total_amount }}</td>
+                            <td>
+                                {% if b.payment %}
+                                    <span class="status-badge">{{ b.payment.payment_status }}</span>
+                                {% else %}
+                                    <span class="text-warning fw-bold">Pending</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if b.payment %}
+                                    <a href="{% url 'download_statement' b.payment.id %}" class="btn-statement">
+                                        Download
+                                    </a>
+                                {% else %}
+                                    <span class="text-muted">Not Available</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="8" class="text-center py-4">No bookings found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

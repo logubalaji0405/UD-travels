@@ -1,0 +1,112 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center/cover;
+    }
+
+    .page-wrapper {
+        min-height: 100vh;
+        flex-direction: column;
+    }
+
+    .content {
+        flex: 1;
+        /* pushes footer down */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .travel-card {
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(10px);
+        padding: 40px;
+        width: 100%;
+        max-width: 420px;
+        border-radius: 15px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+        color: white;
+    }
+
+    .travel-card h3 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #00e6e6;
+    }
+
+    form input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 12px;
+        border-radius: 8px;
+        border: none;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+    }
+
+    form input::placeholder {
+        color: #ddd;
+    }
+
+    form input:focus {
+        outline: none;
+        box-shadow: 0 0 8px #00e6e6;
+    }
+
+    .btn-travel {
+        width: 100%;
+        padding: 12px;
+        background: #00e6e6;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .errorlist {
+        color: #ff4d4d;
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+
+    .btn-travel:hover {
+        background: #00b3b3;
+        color: white;
+    }
+
+    .login-link {
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+        color: #00e6e6;
+        text-decoration: none;
+    }
+
+    .login-link:hover {
+        color: white;
+    }
+</style>
+
+<div class="page-wrapper">
+
+    <div class="content">
+        <div class="travel-card">
+            <h3>🌍 Join Your Travel Journey</h3>
+
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn-travel">Register</button>
+            </form>
+
+            <a href="{% url 'login' %}" class="login-link">Already have account? Login</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

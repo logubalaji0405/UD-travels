@@ -1,0 +1,381 @@
+{% extends 'main.html' %}
+{% block content %}
+
+{% include 'hf/nav2.html' %}
+
+<style>
+    body {
+        background: linear-gradient(rgba(44, 18, 10, 0.55), rgba(44, 18, 10, 0.55)),
+            url('https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=1600&q=80');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 100vh;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .booking-wrapper {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+
+    .premium-card {
+        border: none;
+        border-radius: 28px;
+        overflow: hidden;
+        background: rgba(255, 248, 240, 0.18);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30);
+        margin-top: 50px;
+    }
+
+    .booking-left {
+        background: linear-gradient(160deg, rgba(106, 27, 27, 0.95), rgba(179, 136, 58, 0.90));
+        color: #fff8e7;
+        padding: 45px 35px;
+        height: 100%;
+    }
+
+    .booking-left h2 {
+        font-weight: 800;
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+
+    .booking-left p {
+        color: rgba(255, 248, 231, 0.92);
+        font-size: 15px;
+        line-height: 1.8;
+    }
+
+    .travel-badge {
+        display: inline-block;
+        padding: 8px 18px;
+        border-radius: 30px;
+        background: rgba(255, 248, 231, 0.18);
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 18px;
+        letter-spacing: 0.5px;
+    }
+
+    .feature-box {
+        margin-top: 28px;
+    }
+
+    .feature-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+        font-size: 14px;
+    }
+
+    .feature-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 248, 231, 0.18);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 17px;
+    }
+
+    .booking-right {
+        padding: 40px 35px;
+        background: rgba(255, 252, 247, 0.95);
+    }
+
+    .form-title {
+        font-weight: 800;
+        font-size: 2rem;
+        color: #6a1b1b;
+        margin-bottom: 8px;
+    }
+
+    .form-subtitle {
+        color: #7b5e57;
+        font-size: 14px;
+        margin-bottom: 28px;
+    }
+
+    .form-label {
+        font-weight: 700;
+        color: #5d4037;
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .input-group-text {
+        border-radius: 14px 0 0 14px;
+        border: 1px solid #e7d6b8;
+        background: #fff8e7;
+        color: #b8860b;
+        font-weight: 700;
+    }
+
+    .form-control {
+        border-radius: 14px;
+        border: 1px solid #e7d6b8;
+        padding: 12px 14px;
+        min-height: 48px;
+        font-size: 15px;
+        box-shadow: none !important;
+        background: #fffdf9;
+    }
+
+    .input-group .form-control {
+        border-radius: 0 14px 14px 0;
+    }
+
+    .form-control:focus {
+        border-color: #b8860b;
+        box-shadow: 0 0 0 4px rgba(184, 134, 11, 0.15) !important;
+    }
+
+    .readonly-field {
+        background: #faf4ea !important;
+        font-weight: 600;
+        color: #5d4037;
+    }
+
+    .summary-box {
+        background: linear-gradient(135deg, #fff8e7, #fdf3dc);
+        border: 1px solid #ecd9a7;
+        border-radius: 18px;
+        padding: 18px;
+        margin-top: 8px;
+        margin-bottom: 22px;
+    }
+
+    .summary-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+    }
+
+    .summary-head h6 {
+        margin: 0;
+        font-weight: 800;
+        color: #6a1b1b;
+    }
+
+    .summary-pill {
+        background: white;
+        color: #a87400;
+        border-radius: 20px;
+        padding: 5px 12px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .amount-box {
+        background: white;
+        border-radius: 16px;
+        padding: 14px 16px;
+        border: 1px dashed #c9a227;
+    }
+
+    .amount-label {
+        font-size: 13px;
+        color: #8d6e63;
+        margin-bottom: 4px;
+    }
+
+    .amount-value {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: #4e342e;
+    }
+
+    .btn-booking {
+        width: 100%;
+        border: none;
+        border-radius: 16px;
+        padding: 14px;
+        font-size: 16px;
+        font-weight: 800;
+        color: white;
+        background: linear-gradient(135deg, #8d1f1f, #d4a437);
+        box-shadow: 0 12px 30px rgba(141, 31, 31, 0.28);
+        transition: all 0.3s ease;
+    }
+
+    .btn-booking:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 34px rgba(141, 31, 31, 0.35);
+    }
+
+    .small-note {
+        text-align: center;
+        color: #7b5e57;
+        font-size: 12px;
+        margin-top: 14px;
+    }
+
+    .tn-line {
+        width: 70px;
+        height: 4px;
+        background: linear-gradient(to right, #8d1f1f, #d4a437);
+        border-radius: 10px;
+        margin-bottom: 18px;
+    }
+
+    @media (max-width: 991px) {
+        .booking-left {
+            padding: 30px 25px;
+        }
+
+        .booking-right {
+            padding: 30px 25px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .form-title {
+            font-size: 1.6rem;
+        }
+
+        .amount-value {
+            font-size: 1.3rem;
+        }
+    }
+</style>
+
+<div class="container booking-wrapper py-5">
+    <div class="row justify-content-center w-100">
+        <div class="col-lg-10">
+            <div class="card premium-card">
+                <div class="row g-0">
+                    <div class="col-lg-5">
+                        <div class="booking-left">
+                            <span class="travel-badge">🌴 Tamil Nadu Premium Travel</span>
+                            <h2>Discover the Soul of Tamil Nadu</h2>
+                            <p>
+                                From hill stations to heritage temples, beaches to culture-rich cities,
+                                enjoy a premium booking experience inspired by the beauty and elegance of Tamil Nadu.
+                            </p>
+
+                            <div class="feature-box">
+                                <div class="feature-item">
+                                    <div class="feature-icon">🏛</div>
+                                    <div>Heritage-inspired premium travel experience</div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">🌄</div>
+                                    <div>Hill stations, beaches, temples, and city escapes</div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">✨</div>
+                                    <div>Luxury UI with elegant Tamil Nadu design feel</div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">🧳</div>
+                                    <div>Perfect for family tours, couples, and group trips</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <div class="booking-right">
+                            <div class="tn-line"></div>
+                            <h3 class="form-title">Book Your Tamil Nadu Trip</h3>
+                            <p class="form-subtitle">Fill in your details and confirm your premium package.</p>
+
+                            <form method="POST">
+                                {% csrf_token %}
+
+                                <div class="mb-3">
+                                    <label class="form-label">👤 Name</label>
+                                    <input type="text" name="name" class="form-control"
+                                        placeholder="Enter your full name" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">📧 Email</label>
+                                    <input type="email" name="email" class="form-control"
+                                        placeholder="Enter your email address" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">📍 Destination</label>
+                                    <input type="text" name="destination" class="form-control readonly-field"
+                                        value="{{ request.GET.dest }}" readonly>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">⏳ Duration</label>
+                                    <input type="text" name="duration" class="form-control readonly-field"
+                                        value="{{ request.GET.duration }}" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Vehicle Type</label>
+                                    <input type="text" name="vehicle_type" class="form-control"
+                                        value="{{ request.GET.vehicle_type }}" readonly>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">💰 Package Price / Head</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">₹</span>
+                                        <input type="number" name="price_per_head" id="price_per_head"
+                                            class="form-control readonly-field" value="{{ request.GET.price }}"
+                                            readonly>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">👥 Guests</label>
+                                    <input type="number" name="guests" id="guests" class="form-control"
+                                        placeholder="Enter number of guests" required min="1">
+                                </div>
+
+                                <div class="summary-box">
+                                    <div class="summary-head">
+                                        <h6>Package Summary</h6>
+                                        <span class="summary-pill">Tamil Nadu Tour</span>
+                                    </div>
+
+                                    <div class="amount-box">
+                                        <div class="amount-label">Total Amount</div>
+                                        <div class="amount-value">₹ <span id="total_amount">0</span></div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn-booking">
+                                    Confirm Booking
+                                </button>
+
+                                <div class="small-note">
+                                    Secure your journey and enjoy a premium Tamil Nadu travel experience.
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const priceInput = document.getElementById("price_per_head");
+    const guestInput = document.getElementById("guests");
+    const totalInput = document.getElementById("total_amount");
+
+    function calculateTotal() {
+        let price = parseInt(priceInput.value) || 0;
+        let guests = parseInt(guestInput.value) || 0;
+        totalInput.textContent = price * guests;
+    }
+
+    guestInput.addEventListener("input", calculateTotal);
+    calculateTotal();
+</script>
+
+{% endblock %}

@@ -1,0 +1,336 @@
+{% extends 'main.html' %}
+{% block content %}
+<style>
+    /* ================= PAGE WRAPPER ================= */
+
+.content-area {
+    padding: 40px 20px;
+    background: #f5f7fa;
+}
+
+.page {
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* ================= BANNER ================= */
+
+.page-banner {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+.page-banner img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.page-banner .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-banner span {
+    font-size: 14px;
+    letter-spacing: 2px;
+    opacity: 0.8;
+}
+
+.page-banner h2 {
+    font-size: 36px;
+    margin-top: 10px;
+}
+
+/* ================= INFO CARDS ================= */
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.info-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.info-card:hover {
+    transform: translateY(-8px);
+}
+
+.info-card .icon {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.info-card h3 {
+    margin-bottom: 10px;
+}
+
+/* ================= SECTION HEADING ================= */
+
+.sec-heading {
+    text-align: center;
+    margin: 40px 0 20px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+/* ================= STEPS ================= */
+
+.steps {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.step {
+    display: flex;
+    gap: 15px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    align-items: flex-start;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.step-num {
+    min-width: 40px;
+    height: 40px;
+    background: #0072ff;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.step-body h4 {
+    margin-bottom: 5px;
+}
+
+/* ================= TABLE ================= */
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px;
+    text-align: center;
+}
+
+.styled-table thead {
+    background: #0072ff;
+    color: white;
+}
+
+.styled-table tbody tr:nth-child(even) {
+    background: #f2f2f2;
+}
+
+/* ================= BADGES ================= */
+
+.badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: white;
+}
+
+.badge-green {
+    background: #28a745;
+}
+
+.badge-yellow {
+    background: #ffc107;
+    color: black;
+}
+
+.badge-red {
+    background: #dc3545;
+}
+
+/* ================= HIGHLIGHT BOX ================= */
+
+.highlight {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-top: 40px;
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.hi-icon {
+    font-size: 30px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+
+    .page-banner img {
+        height: 200px;
+    }
+
+    .page-banner h2 {
+        font-size: 24px;
+    }
+
+    .step {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .highlight {
+        flex-direction: column;
+        text-align: center;
+    }
+
+}
+</style>
+{% include 'hf/nav2.html' %}
+
+  <div class="content-area mt-5">
+
+    <!-- ═══════════════════════════════════════ -->
+    <!--          BOOKING INFO PAGE              -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="page active" id="booking">
+
+      <div class="page-banner">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80" alt="Booking">
+        <div class="overlay">
+          <span>How It Works</span>
+          <h2>Booking Information</h2>
+        </div>
+      </div>
+
+      <div class="cards-grid">
+        <div class="info-card">
+          <div class="icon">✈️</div>
+          <h3>Easy Online Booking</h3>
+          <p>Choose your destination, select your travel dates, and book in just 3 simple steps. Instant confirmation
+            sent to your email.</p>
+        </div>
+        <div class="info-card">
+          <div class="icon">💳</div>
+          <h3>Secure Payment</h3>
+          <p>We accept UPI, Credit/Debit cards, Net Banking, and EMI options. All payments are 100% encrypted and
+            secure.</p>
+        </div>
+        <div class="info-card">
+          <div class="icon">🎟️</div>
+          <h3>Instant Confirmation</h3>
+          <p>Receive your booking confirmation, e-ticket, and travel itinerary instantly on your registered email and
+            phone number.</p>
+        </div>
+      </div>
+
+      <h2 class="sec-heading">How to Book</h2>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Choose Your Destination</h4>
+            <p>Browse our curated list of destinations across Tamil Nadu. Filter by category — beaches, hill stations,
+              temples, or wildlife — and pick your perfect spot.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Select Package & Dates</h4>
+            <p>Pick your travel dates, number of travelers, and package type. All packages include hotel, food,
+              transport, and guided sightseeing.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Make Payment</h4>
+            <p>Pay securely using UPI, card, or net banking. A 30% advance confirms your booking. The remaining amount
+              is due 7 days before travel.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h4>Get Confirmation & Travel!</h4>
+            <p>Receive your e-ticket, hotel details, and itinerary via email. Our support team is available 24/7 for any
+              assistance during your trip.</p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="sec-heading">Cancellation Policy</h2>
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Cancellation Time</th>
+            <th>Refund Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>30+ days before travel</td>
+            <td>100% Refund</td>
+            <td><span class="badge badge-green">Full Refund</span></td>
+          </tr>
+          <tr>
+            <td>15–29 days before travel</td>
+            <td>75% Refund</td>
+            <td><span class="badge badge-green">Partial Refund</span></td>
+          </tr>
+          <tr>
+            <td>7–14 days before travel</td>
+            <td>50% Refund</td>
+            <td><span class="badge badge-yellow">Half Refund</span></td>
+          </tr>
+          <tr>
+            <td>Less than 7 days</td>
+            <td>No Refund</td>
+            <td><span class="badge badge-red">No Refund</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="highlight">
+        <div class="hi-icon">📞</div>
+        <div>
+          <h4>Need Help with Your Booking?</h4>
+          <p>Our travel experts are available Monday–Saturday, 9 AM to 7 PM. Call us at <strong>+91 98765 43210</strong>
+            or email <strong>support@udtraveler.com</strong></p>
+        </div>
+      </div>
+    </div>
+    {% endblock %}

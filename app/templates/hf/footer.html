@@ -1,0 +1,187 @@
+<footer class="tn-footer">
+
+    <div class="footer-container">
+
+        <!-- Brand -->
+        <div class="footer-col">
+            <h2 class="footer-logo">🌴 UD-Traveler</h2>
+            <p>
+                Discover the beauty of Tamil Nadu — from temples to beaches, hills to heritage.
+                Travel premium. Travel unforgettable.
+            </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+            <h3>Explore</h3>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'destination' %}">Destinations</a></li>
+                <li><a href="{% url 'gallery' %}">Gallery</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Support -->
+        <div class="footer-col">
+            <h3>Support</h3>
+            <ul>
+                <li><a href="{% url 'contact' %}">Help Center</a></li>
+                <li><a href="{% url 'fbooking' %}">Booking Info</a></li>
+                <li><a href="{% url 'privacy' %}">Privacy Policy</a></li>
+                <li><a href="{% url 'terms' %}">Terms & Conditions</a></li>
+            </ul>
+        </div>
+
+        <!-- Social -->
+        <div class="footer-col">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-twitter-x"></i></a>
+                <a href="#"><i class="bi bi-youtube"></i></a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 UD-Traveler | Designed by Balaji ✨</p>
+    </div>
+
+</footer>
+
+<style>
+    .tn-footer {
+    background: linear-gradient(135deg, #0F4C5C, #177086); /* MATCH NAVBAR */
+    color: #eaf7fb;
+    padding: 70px 0 0;
+    margin-top: 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* subtle design shapes */
+.tn-footer::before {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+    top: -60px;
+    right: -60px;
+}
+
+.tn-footer::after {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+    bottom: -50px;
+    left: -50px;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.footer-logo {
+    font-weight: 900;
+    margin-bottom: 10px;
+    color: #FFD166;
+    font-size: 1.6rem;
+}
+
+.footer-col h3 {
+    font-weight: 800;
+    margin-bottom: 15px;
+    color: #FFD166;
+}
+
+.footer-col p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #d8eef3;
+}
+
+/* links */
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+    text-decoration: none;
+    color: #d8eef3;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+.footer-col ul li a:hover {
+    color: #FFD166;
+    padding-left: 6px;
+}
+
+/* social icons */
+.social-icons {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.social-icons a {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #E9A03B, #FFD166);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #5a3a00;
+    font-size: 18px;
+    transition: 0.3s;
+    text-decoration: none;
+    box-shadow: 0 8px 18px rgba(233,160,59,0.35);
+}
+
+.social-icons a:hover {
+    transform: translateY(-4px) scale(1.05);
+    background: linear-gradient(135deg, #FFD166, #E9A03B);
+}
+
+/* bottom */
+.footer-bottom {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    background: rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    color: #cfeaf1;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+    .footer-container {
+        text-align: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+}
+</style>

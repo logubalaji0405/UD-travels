@@ -1,0 +1,380 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<style>
+    body {
+        background: linear-gradient(rgba(44, 18, 10, 0.60), rgba(44, 18, 10, 0.60)),
+            url('https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=1600&q=80');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 100vh;
+    }
+
+    .success-wrapper {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+
+    .success-card {
+        border: none;
+        border-radius: 28px;
+        overflow: hidden;
+        margin-top: 50px;
+        background: rgba(255, 252, 247, 0.95);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30);
+    }
+
+    .success-left {
+        background: linear-gradient(160deg, rgba(106, 27, 27, 0.96), rgba(212, 164, 55, 0.90));
+        color: #fff8e7;
+        padding: 40px 32px;
+        height: 100%;
+    }
+
+    .success-badge {
+        display: inline-block;
+        padding: 8px 18px;
+        border-radius: 30px;
+        background: rgba(255, 248, 231, 0.18);
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 18px;
+        letter-spacing: 0.3px;
+    }
+
+    .success-left h2 {
+        font-weight: 800;
+        margin-bottom: 12px;
+    }
+
+    .success-left p {
+        color: rgba(255, 248, 231, 0.92);
+        line-height: 1.8;
+        font-size: 15px;
+    }
+
+    .feature-list {
+        margin-top: 25px;
+    }
+
+    .feature-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 14px;
+        font-size: 14px;
+    }
+
+    .feature-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: rgba(255, 248, 231, 0.18);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+    }
+
+    .success-right {
+        padding: 36px 34px;
+    }
+
+    .top-line {
+        width: 70px;
+        height: 4px;
+        background: linear-gradient(to right, #8d1f1f, #d4a437);
+        border-radius: 10px;
+        margin-bottom: 18px;
+    }
+
+    .success-icon {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #16a34a, #22c55e);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 42px;
+        margin: 0 auto 18px;
+        box-shadow: 0 15px 30px rgba(34, 197, 94, 0.25);
+    }
+
+    .success-title {
+        font-weight: 800;
+        color: #6a1b1b;
+        margin-bottom: 8px;
+    }
+
+    .success-subtitle {
+        color: #7b5e57;
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+
+    .details-box {
+        background: linear-gradient(135deg, #fff8e7, #fdf3dc);
+        border: 1px solid #ecd9a7;
+        border-radius: 20px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .details-title {
+        font-weight: 800;
+        color: #6a1b1b;
+        margin-bottom: 14px;
+    }
+
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(93, 64, 55, 0.10);
+    }
+
+    .detail-row:last-child {
+        border-bottom: none;
+    }
+
+    .detail-label {
+        font-weight: 700;
+        color: #5d4037;
+    }
+
+    .detail-value {
+        color: #4e342e;
+        text-align: right;
+        font-weight: 600;
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 20px;
+        background: #22c55e;
+        color: white;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .screenshot-box {
+        background: #fffaf2;
+        border: 1px solid #ecd9a7;
+        border-radius: 18px;
+        padding: 16px;
+        margin-bottom: 20px;
+    }
+
+    .screenshot-box h5 {
+        color: #6a1b1b;
+        font-weight: 800;
+        margin-bottom: 14px;
+    }
+
+    .screenshot-box img {
+        border-radius: 16px;
+        max-height: 300px;
+        object-fit: cover;
+    }
+
+    .btn-home {
+        border: none;
+        border-radius: 16px;
+        padding: 12px 22px;
+        font-weight: 800;
+        color: white;
+        background: linear-gradient(135deg, #8d1f1f, #d4a437);
+        box-shadow: 0 12px 30px rgba(141, 31, 31, 0.25);
+        text-decoration: none;
+    }
+
+    .btn-home:hover {
+        color: white;
+        transform: translateY(-1px);
+    }
+
+    .btn-book {
+        border-radius: 16px;
+        padding: 12px 22px;
+        font-weight: 800;
+        border: 1px solid #b8860b;
+        color: #8d1f1f;
+        background: white;
+        text-decoration: none;
+    }
+
+    .btn-book:hover {
+        color: #8d1f1f;
+        background: #fff8e7;
+    }
+
+    .btn-statement {
+        border: none;
+        border-radius: 16px;
+        padding: 12px 22px;
+        font-weight: 800;
+        color: white;
+        background: linear-gradient(135deg, #0d6efd, #3b82f6);
+        box-shadow: 0 12px 30px rgba(13, 110, 253, 0.25);
+        text-decoration: none;
+    }
+
+    .btn-statement:hover {
+        color: white;
+        transform: translateY(-1px);
+    }
+
+    @media (max-width: 991px) {
+
+        .success-left,
+        .success-right {
+            padding: 28px 22px;
+        }
+
+        .detail-row {
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .detail-value {
+            text-align: left;
+        }
+    }
+</style>
+{% include 'hf/nav2.html' %}
+<div class="container success-wrapper py-5">
+    <div class="row justify-content-center w-100">
+        <div class="col-lg-10">
+            <div class="card success-card">
+                <div class="row g-0">
+                    <div class="col-lg-5">
+                        <div class="success-left">
+                            <span class="success-badge">🌴 Tamil Nadu Premium Travel</span>
+                            <h2>Booking Confirmed</h2>
+                            <p>
+                                Your payment was successful and your Tamil Nadu trip has been confirmed.
+                                Get ready to enjoy a premium travel experience filled with culture,
+                                comfort, and unforgettable memories.
+                            </p>
+
+                            <div class="feature-list">
+                                <div class="feature-item">
+                                    <div class="feature-icon">✅</div>
+                                    <div>Secure payment completed successfully</div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">🏞</div>
+                                    <div>Your destination package is now reserved</div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">💳</div>
+                                    <div>Payment details safely recorded</div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">🧳</div>
+                                    <div>Ready for your premium Tamil Nadu journey</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <div class="success-right">
+                            <div class="top-line"></div>
+
+                            <div class="text-center">
+                                <div class="success-icon">✓</div>
+                                <h2 class="success-title">Payment Successful</h2>
+                                <p class="success-subtitle">
+                                    Your booking payment has been completed successfully.
+                                </p>
+                            </div>
+
+                            <div class="details-box">
+                                <h5 class="details-title">Booking Details</h5>
+
+                                <div class="detail-row">
+                                    <div class="detail-label">Booking ID</div>
+                                    <div class="detail-value">{{ payment.booking.id }}</div>
+                                </div>
+
+                                <div class="detail-row">
+                                    <div class="detail-label">Name</div>
+                                    <div class="detail-value">{{ payment.booking.name }}</div>
+                                </div>
+
+                                <div class="detail-row">
+                                    <div class="detail-label">Destination</div>
+                                    <div class="detail-value">{{ payment.booking.destination }}</div>
+                                </div>
+
+                                <div class="detail-row">
+                                    <div class="detail-label">Duration</div>
+                                    <div class="detail-value">{{ payment.booking.duration }}</div>
+                                </div>
+                                <div class="detail-row">
+                                    <div class="detail-label">Vehicle Type</div>
+                                    <div class="detail-value">{{ payment.booking.vehicle_type }}</div>
+                                </div>
+                                <div class="detail-row">
+                                    <div class="detail-label">Guests</div>
+                                    <div class="detail-value">{{ payment.booking.guests }}</div>
+                                </div>
+
+                                <div class="detail-row">
+                                    <div class="detail-label">Total Booking Amount</div>
+                                    <div class="detail-value">₹{{ payment.booking.total_amount }}</div>
+                                </div>
+
+                                <div class="detail-row">
+                                    <div class="detail-label">Paid Amount</div>
+                                    <div class="detail-value">₹{{ payment.amount }}</div>
+                                </div>
+
+                                <div class="detail-row">
+                                    <div class="detail-label">Payment Method</div>
+                                    <div class="detail-value">{{ payment.payment_method }}</div>
+                                </div>
+
+                                <div class="detail-row">
+                                    <div class="detail-label">UPI App</div>
+                                    <div class="detail-value">{{ payment.upi_app }}</div>
+                                </div>
+
+                                <div class="detail-row">
+                                    <div class="detail-label">Status</div>
+                                    <div class="detail-value">
+                                        <span class="status-badge">{{ payment.payment_status }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% if payment.QR %}
+                            <div class="screenshot-box text-center">
+                                <h5>Uploaded Payment Screenshot</h5>
+                                <img src="{{ payment.QR.url }}" alt="Payment Screenshot" class="img-fluid shadow">
+                            </div>
+                            {% endif %}
+
+                            <div class="mt-4 d-flex flex-wrap gap-2 justify-content-center">
+                                <a href="/" class="btn-home">Go Home</a>
+                                <a href="/booking/" class="btn-book">New Booking</a>
+                                <a href="{% url 'download_statement' payment.id %}" class="btn-statement">
+                                    Download Statement
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

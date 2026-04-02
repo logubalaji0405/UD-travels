@@ -12,10 +12,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ===============================
 # SECURITY SETTINGS
 # ===============================
-SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-change-this")
+SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-key")
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ['*']   # simple for first deploy
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", ".vercel.app"]   # simple for first deploy
 
 
 

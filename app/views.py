@@ -11,15 +11,20 @@ from io import BytesIO
 from decimal import Decimal
 from urllib.parse import urlencode
 from django.http import JsonResponse
-
-
+from django.db import OperationalError, ProgrammingError
 
 
 def home(request):
-    ba = Banner.objects.all()
-    t = Timg.objects.all()
-    return render(request, 'index.html', {'ba': ba, 'timg': t})
+    ba = []
+    t = []
 
+    try:
+        ba = Banner.objects.all()
+        t = Timg.objects.all()
+    except (OperationalError, ProgrammingError):
+        pass
+
+    return render(request, 'index.html', {'ba': ba, 'timg': t})
 
 def destination(request):
     bimg = Bannerdestination.objects.all()

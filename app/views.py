@@ -12,6 +12,8 @@ from decimal import Decimal
 from urllib.parse import urlencode
 from django.http import JsonResponse
 from django.db import OperationalError, ProgrammingError
+from django.db import OperationalError, ProgrammingError
+
 
 
 def home(request):
@@ -22,7 +24,7 @@ def home(request):
         ba = Banner.objects.all()
         t = Timg.objects.all()
     except (OperationalError, ProgrammingError):
-        pass
+        print("DB not ready")
 
     return render(request, 'index.html', {'ba': ba, 'timg': t})
 

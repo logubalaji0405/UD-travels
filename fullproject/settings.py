@@ -141,7 +141,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # MEDIA FILES (UPLOADS)
 # ===============================
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = "/opt/render/project/src/media"
 
 
 # ===============================

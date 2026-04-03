@@ -439,32 +439,15 @@ body {
 
 {% include 'hf/nav1.html' %}
 
-<section class="destination-banner page-space">
-    <div id="bannerCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            {% for b in bimg %}
-            <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                <img src="{{ b.Bimg.url }}" alt="Banner Image">
-            </div>
-            {% endfor %}
-        </div>
-    </div>
 
-    <div class="banner-content">
-        
-        <h1>Explore <span>Tamil Nadu</span></h1>
-        <p>Discover temples, beaches, hill stations, culture, heritage and unforgettable premium journeys.</p>
-
-        <form method="get" action="{% url 'destination' %}" class="search-box">
+    <div class="banner-content"></div>
             <div class="search-wrap">
                 <input type="text" name="search" placeholder="Search destinations..." value="{{ request.GET.search }}">
                 <button type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>
-        </form>
     </div>
-</section>
 
 <section class="container my-5">
     <div class="section-title">

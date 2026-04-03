@@ -23,70 +23,6 @@
         font-family: 'Segoe UI', sans-serif;
     }
 
-    /* Banner */
-    .gallery-banner {
-        position: relative;
-        height: 430px;
-        background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        border-radius: 0 0 30px 30px;
-    }
-
-    .gallery-banner::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to right,
-                rgba(10, 37, 64, 0.86),
-                rgba(30, 144, 255, 0.42));
-    }
-
-    .gallery-banner-content {
-        position: relative;
-        z-index: 2;
-        text-align: center;
-        color: white;
-        padding: 20px;
-        width: 90%;
-        max-width: 900px;
-    }
-
-    .gallery-badge {
-        display: inline-block;
-        background: rgba(255, 255, 255, 0.12);
-        color: var(--gold);
-        padding: 8px 18px;
-        border-radius: 30px;
-        font-size: 14px;
-        font-weight: 700;
-        letter-spacing: 0.4px;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(8px);
-        margin-bottom: 18px;
-    }
-
-    .gallery-banner-content h1 {
-        font-size: 58px;
-        font-weight: 800;
-        margin-bottom: 12px;
-        color: var(--white);
-        text-shadow: 2px 2px 14px rgba(0, 0, 0, 0.35);
-    }
-
-    .gallery-banner-content h1 span {
-        color: var(--gold);
-    }
-
-    .gallery-banner-content p {
-        font-size: 18px;
-        max-width: 800px;
-        margin: auto;
-        color: var(--text-soft);
-    }
-
     /* Section Title */
     .section-title {
         text-align: center;
@@ -351,17 +287,6 @@
 }
 
     @media (max-width: 768px) {
-        .gallery-banner {
-            height: 320px;
-        }
-
-        .gallery-banner-content h1 {
-            font-size: 34px;
-        }
-
-        .gallery-banner-content p {
-            font-size: 15px;
-        }
 
         .section-title h2 {
             font-size: 28px;
@@ -377,17 +302,6 @@
     }
 </style>
 
-<!-- Banner -->
-<section class="gallery-banner">
-    <div class="gallery-banner-content">
-        <div class="gallery-badge">Premium Tamil Nadu Moments</div>
-        <h1>Travel <span>Gallery</span></h1>
-        <p>
-            Explore the beauty of Tamil Nadu through our handpicked travel moments,
-            breathtaking destinations, temples, beaches, hills, and unforgettable journeys.
-        </p>
-    </div>
-</section>
 
 <div class="container py-5">
 

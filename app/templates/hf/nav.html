@@ -93,7 +93,7 @@
         color: white;
         font-weight: 700;
         background: linear-gradient(135deg, #0F4C5C, #177086);
-        border: 1px solid rgba(255,255,255,0.18);
+        border: 1px solid rgba(255, 255, 255, 0.18);
         box-shadow: 0 8px 18px rgba(15, 76, 92, 0.25);
         transition: 0.3s ease;
     }
@@ -214,19 +214,23 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">About</a>
+                </li>
             </ul>
 
             <div class="tn-nav-right">
                 <form method="get" action="{% url 'destination' %}" class="tn-search-box">
                     <i class="bi bi-search"></i>
-                    <input type="text" name="search" placeholder="Search destinations..." value="{{ request.GET.search }}">
+                    <input type="text" name="search" placeholder="Search destinations..."
+                        value="{{ request.GET.search }}">
                 </form>
 
                 {% if user.is_authenticated and not user.is_superuser %}
                 <a href="{% url 'booking_history' %}" class="tn-mybooking-btn">
                     Your Bookings
                 </a>
-               
+
                 {% else %}
                 <a href="{% url 'login' %}" class="tn-book-btn">
                     Book Now
@@ -236,9 +240,9 @@
                 <div class="dropdown">
                     <button class="tn-login-btn dropdown-toggle" data-bs-toggle="dropdown">
                         {% if user.is_authenticated and not user.is_superuser %}
-                            {{ user.username|slice:":1"|upper }}
+                        {{ user.username|slice:":1"|upper }}
                         {% else %}
-                            <i class="bi bi-person"></i>
+                        <i class="bi bi-person"></i>
                         {% endif %}
                     </button>
 
@@ -247,20 +251,18 @@
                         <li class="dropdown-item text-center fw-bold">
                             👋 Welcome {{ user.username }}
                         </li>
-
-                        <li><hr class="dropdown-divider"></li>
-
-
-                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                        </li>
 
                         <li>
-                            <form method="post" action="{% url 'logout' %}">
-                                {% csrf_token %}
-                                <button type="submit" class="dropdown-item">
-                                    Logout
-                                </button>
-                            </form>
+                            <hr class="dropdown-divider">
                         </li>
+
+                      
                         {% else %}
                         <li>
                             <a class="dropdown-item" href="{% url 'login' %}">
@@ -268,7 +270,9 @@
                             </a>
                         </li>
 
-                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
 
                         <li>
                             <a class="dropdown-item" href="{% url 'register' %}">

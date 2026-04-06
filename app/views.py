@@ -13,6 +13,7 @@ from urllib.parse import urlencode
 from django.http import JsonResponse
 from django.db import OperationalError, ProgrammingError
 from django.db import OperationalError, ProgrammingError
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -105,6 +106,9 @@ def privacy(request):
 def terms(request):
     return render(request, 'info/terms.html')
 
+def about(request):
+    return render(request, 'about.html')
+
 def booking_history(request):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to view your bookings.")
@@ -128,7 +132,7 @@ def booking(request):
         booking = Booking.objects.create(
             user=request.user if request.user.is_authenticated else None,
             name=name,
-            email=email,
+            email=request.user.email if request.user.is_authenticated else email,
             destination=destination,
             duration=duration,
             vehicle_type=vehicle_type,
@@ -375,3 +379,16 @@ def download_statement(request, payment_id):
     response = HttpResponse(buffer, content_type="application/pdf")
     response["Content-Disposition"] = f'attachment; filename="{filename}"'
     return response
+
+
+@login_required
+def profile(request):
+    user = request.user
+    bookings = Booking.objects.filter(email=user.email).order_by('-id')
+
+    first_letter = user.username[0].upper() if user.username else "U"
+
+    return render(request, 'profile.html', {
+        'bookings': bookings,
+        'first_letter': first_letter,
+    })

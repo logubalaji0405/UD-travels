@@ -28,6 +28,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">About</a>
+                </li>
             </ul>
 
             <div class="tn-nav-right">
@@ -37,7 +40,6 @@
                     Your Bookings
                 </a>
 
-              
                 {% else %}
                 <a href="{% url 'login' %}" class="tn-book-btn">
                     Book Now
@@ -59,16 +61,17 @@
                         <li class="dropdown-item text-center fw-bold">
                             👋 Welcome {{ user.username }}
                         </li>
-
-                        <li><hr class="dropdown-divider"></li>
-
-                        <li>
-                            <a class="dropdown-item" href="">
-                                <i class="bi bi-card-checklist"></i> Your Bookings
-                            </a>
+                         <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile' %}">Profile</a>
                         </li>
 
-                        <li><hr class="dropdown-divider"></li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
 
                         <li>
                             <form method="post" action="{% url 'logout' %}">
@@ -87,7 +90,9 @@
                             </a>
                         </li>
 
-                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
 
                         <li>
                             <a class="dropdown-item" href="{% url 'register' %}">

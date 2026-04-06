@@ -1,0 +1,439 @@
+{% extends 'main.html' %}
+{% block content %}
+
+{% include 'hf/nav2.html' %}
+
+<style>
+    body {
+        background: #f4f8ff;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .about-hero {
+        position: relative;
+        background: linear-gradient(rgba(8, 35, 74, 0.75), rgba(20, 84, 167, 0.75)),
+            url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+        height: 430px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+    }
+
+    .about-hero h1 {
+        font-size: 58px;
+        font-weight: 800;
+        margin-bottom: 15px;
+    }
+
+    .about-hero p {
+        font-size: 20px;
+        max-width: 750px;
+        margin: auto;
+        color: #eaf4ff;
+    }
+
+    .section-title {
+        font-size: 38px;
+        font-weight: 800;
+        color: #0d47a1;
+        margin-bottom: 18px;
+    }
+
+    .about-section {
+        padding: 50px 0;
+    }
+
+    .about-card {
+        background: white;
+        border: none;
+        border-radius: 22px;
+        box-shadow: 0 10px 35px rgba(13, 71, 161, 0.12);
+        padding: 35px;
+        height: 100%;
+        transition: 0.3s ease;
+    }
+
+    .about-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 14px 40px rgba(13, 71, 161, 0.18);
+    }
+
+    .about-card h4 {
+        color: #1565c0;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    .about-card p {
+        color: #444;
+        font-size: 16px;
+        line-height: 1.8;
+    }
+
+    .feature-box {
+        background: linear-gradient(135deg, #1565c0, #42a5f5);
+        color: white;
+        padding: 30px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 12px 30px rgba(21, 101, 192, 0.25);
+        height: 100%;
+    }
+
+    .feature-box h5 {
+        font-size: 22px;
+        font-weight: 700;
+        margin-top: 15px;
+    }
+
+    .feature-box p {
+        font-size: 15px;
+        color: #f1f7ff;
+        line-height: 1.7;
+    }
+
+    .stats-section {
+        background: linear-gradient(135deg, #0d47a1, #1976d2);
+        border-radius: 30px;
+        padding: 45px 25px;
+        color: white;
+        margin-top: 30px;
+    }
+
+    .stat-item h2 {
+        font-size: 42px;
+        font-weight: 800;
+    }
+
+    .stat-item p {
+        margin: 0;
+        color: #dbeafe;
+        font-size: 17px;
+    }
+
+    .team-box {
+        background: #ffffff;
+        border-radius: 22px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 10px 25px rgba(13, 71, 161, 0.10);
+        transition: 0.3s ease;
+        height: 100%;
+    }
+
+    .team-box:hover {
+        transform: translateY(-8px);
+    }
+
+    .team-box img {
+        width: 110px;
+        height: 110px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 15px;
+        border: 4px solid #e3f2fd;
+    }
+
+    .team-box h5 {
+        color: #0d47a1;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .team-box span {
+        color: #666;
+        font-size: 14px;
+    }
+
+    .cta-box {
+        background: linear-gradient(135deg, #1e88e5, #64b5f6);
+        color: white;
+        border-radius: 28px;
+        padding: 50px 30px;
+        text-align: center;
+        margin-top: 60px;
+        box-shadow: 0 15px 40px rgba(30, 136, 229, 0.25);
+    }
+
+    .cta-box h2 {
+        font-size: 40px;
+        font-weight: 800;
+        margin-bottom: 15px;
+    }
+
+    .cta-box p {
+        max-width: 800px;
+        margin: auto;
+        color: #eef7ff;
+        font-size: 18px;
+    }
+
+    .cta-btn {
+        margin-top: 25px;
+        background: white;
+        color: #1565c0;
+        border: none;
+        padding: 14px 34px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 16px;
+        text-decoration: none;
+        display: inline-block;
+        transition: 0.3s ease;
+    }
+
+    .cta-btn:hover {
+        background: #0d47a1;
+        color: white;
+    }
+
+    @media (max-width: 768px) {
+        .about-hero h1 {
+            font-size: 38px;
+        }
+
+        .section-title {
+            font-size: 28px;
+        }
+
+        .cta-box h2 {
+            font-size: 30px;
+        }
+    }
+</style>
+
+<div class="about-hero">
+    <div class="container">
+        <h1>About UD-Traveler</h1>
+        <p>Discover Tamil Nadu with premium travel experiences, curated destinations, smooth booking, and unforgettable
+            memories.</p>
+    </div>
+</div>
+
+<div class="container about-section">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-6">
+            <h2 class="section-title">Who We Are</h2>
+            <p style="font-size:17px; color:#444; line-height:1.9;">
+                UD-Traveler is a premium Tamil Nadu travel website created to help travelers explore the beauty,
+                culture, beaches, temples, hills, and heritage of South India.
+                We offer easy destination browsing, package details, comfortable booking, and secure payment options for
+                a smooth travel experience.
+            </p>
+            <p style="font-size:17px; color:#444; line-height:1.9;">
+                From Ooty hill stations to Rameswaram temples, Marina Beach to Kanyakumari sunrise views, our goal is to
+                make every journey memorable and stress-free.
+            </p>
+        </div>
+        <div class="col-lg-6">
+            <div class="about-card">
+                <h4>Our Mission</h4>
+                <p>
+                    Our mission is to provide travelers with trusted, stylish, and user-friendly travel booking services
+                    focused on Tamil Nadu tourism.
+                    We believe travel should be simple, beautiful, and inspiring.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5 g-4">
+        <div class="col-md-4">
+            <div class="feature-box">
+                <div style="font-size:40px;">🌍</div>
+                <h5>Top Destinations</h5>
+                <p>Explore beaches, temples, heritage cities, waterfalls, and hill stations across Tamil Nadu.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-box">
+                <div style="font-size:40px;">🧳</div>
+                <h5>Easy Booking</h5>
+                <p>Simple travel booking flow with package details, pricing, guest selection, and booking confirmation.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-box">
+                <div style="font-size:40px;">💳</div>
+                <h5>Secure Payment</h5>
+                <p>Safe payment support for your trips with a clean and reliable booking experience.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-section text-center">
+        <div class="row">
+            <div class="col-md-3 stat-item">
+                <h2>50+</h2>
+                <p>Destinations</p>
+            </div>
+            <div class="col-md-3 stat-item">
+                <h2>500+</h2>
+                <p>Happy Travelers</p>
+            </div>
+            <div class="col-md-3 stat-item">
+                <h2>100+</h2>
+                <p>Tour Packages</p>
+            </div>
+            <div class="col-md-3 stat-item">
+                <h2>24/7</h2>
+                <p>Support</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <h2 class="section-title text-center">Why Choose Us</h2>
+        <div class="row g-4 mt-2">
+            <div class="col-md-6 col-lg-3">
+                <div class="about-card text-center">
+                    <h4>Premium Design</h4>
+                    <p>Modern and attractive UI for a better user experience on every page.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="about-card text-center">
+                    <h4>Tamil Nadu Focus</h4>
+                    <p>Specially curated places and experiences centered on Tamil Nadu tourism.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="about-card text-center">
+                    <h4>Reliable Booking</h4>
+                    <p>Users can easily choose destinations, packages, vehicles, and booking options.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="about-card text-center">
+                    <h4>Trusted Service</h4>
+                    <p>Safe, simple, and customer-friendly travel planning for every trip.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        
+        <section class="about-section ">
+            <div class="container">
+                <div class="row align-items-center g-5">
+
+                    <div class="col-lg-5 text-center">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                            style="width:220px; border-radius:50%; box-shadow:0 10px 30px rgba(0,0,0,0.2);">
+                    </div>
+
+                    <div class="col-lg-7">
+                        <h2 class="section-title">Meet Our Founder</h2>
+                        <h4 style="color:#1565c0; font-weight:700;">Balaji – Founder & Developer</h4>
+
+                        <p style="font-size:17px; line-height:1.9; color:#555;">
+                            UD-Traveler was created with a passion to showcase the beauty of Tamil Nadu
+                            through a modern and premium digital experience. The goal is to make travel
+                            booking simple, attractive, and accessible for everyone.
+                        </p>
+
+                        <p style="font-size:17px; line-height:1.9; color:#555;">
+                            From designing the UI to building the full Django backend, this platform
+                            focuses on real user experience, smooth booking, and trusted travel planning.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="section-title">Our Team</h2>
+                    <p class="section-subtitle">
+                        A passionate team working to make your travel smooth, safe, and memorable.
+                    </p>
+                </div>
+
+                <div class="row g-4">
+
+                    <div class="col-md-3">
+                        <div class="team-box">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+                            <h5>Travel Planner</h5>
+                            <span>Trip Expert</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="team-box">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+                            <h5>Booking Manager</h5>
+                            <span>Reservations</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="team-box">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+                            <h5>Customer Support</h5>
+                            <span>24/7 Help</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="team-box">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+                            <h5>Tour Guide</h5>
+                            <span>Local Expert</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5">
+    <div class="container">
+        <div class="stats-section text-center">
+
+            <div class="row g-4">
+
+                <div class="col-md-3 stat-item">
+                    <h2>3+</h2>
+                    <p>Years Experience</p>
+                </div>
+
+                <div class="col-md-3 stat-item">
+                    <h2>1000+</h2>
+                    <p>Happy Travelers</p>
+                </div>
+
+                <div class="col-md-3 stat-item">
+                    <h2>250+</h2>
+                    <p>Trips Completed</p>
+                </div>
+
+                <div class="col-md-3 stat-item">
+                    <h2>50+</h2>
+                    <p>Destinations</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+    </div>
+
+    <div class="cta-box">
+        <h2>Start Your Journey With Us</h2>
+        <p>
+            Discover the best of Tamil Nadu with premium packages, smooth booking, and beautiful destinations.
+            Travel smarter, safer, and better with UD-Traveler.
+        </p>
+        <a href="{% url 'destination' %}" class="cta-btn">Explore Destinations</a>
+    </div>
+</div>
+
+{% endblock %}

@@ -162,14 +162,25 @@
         100%{ background-position: 300%; }
     }
 
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon{
-        background-color: rgba(15, 76, 92, 0.78);
-        border-radius: 50%;
-        padding: 22px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
-    }
+   /* FIX BUTTON CLICK ISSUE */
+.carousel-control-prev,
+.carousel-control-next {
+    z-index: 20;
+}
 
+/* FIX OVERLAY BLOCKING */
+.hero-banner::before {
+    pointer-events: none;
+}
+
+/* MAKE BUTTONS BIGGER */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(15, 76, 92, 0.8);
+    border-radius: 50%;
+    padding: 25px;
+    background-size: 60%;
+}
     .section-space{
         padding: 80px 0 20px;
     }
@@ -884,6 +895,7 @@
         </div>
     </div>
 </section>
+
 
 {% include 'chatbot.html' %}
 

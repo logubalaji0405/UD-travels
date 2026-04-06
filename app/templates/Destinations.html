@@ -23,7 +23,7 @@ body {
 
 /* NAV SPACE */
 .page-space {
-    padding-top: 80px;
+    padding-top: 90px;
 }
 
 /* BANNER */
@@ -100,34 +100,44 @@ body {
     justify-content: center;
 }
 
-.search-box .search-wrap {
+.search-wrap {
     position: relative;
     width: 100%;
-    max-width: 420px;
+    max-width: 470px;
 }
 
-.search-box input {
+.search-wrap input {
     width: 100%;
     border: none;
     outline: none;
     border-radius: 40px;
     padding: 14px 22px;
-    padding-right: 50px;
-    background: rgba(255,255,255,0.95);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+    padding-right: 58px;
+    background: rgba(255,255,255,0.96);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.10);
     font-size: 15px;
+    transition: 0.3s ease;
 }
 
-.search-box button {
+.search-wrap input:focus {
+    box-shadow: 0 12px 28px rgba(30, 144, 255, 0.25);
+}
+
+.search-wrap button {
     position: absolute;
     right: 6px;
     top: 6px;
     bottom: 6px;
     border: none;
-    width: 42px;
+    width: 44px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--primary-light), var(--accent));
     color: white;
+    transition: 0.3s ease;
+}
+
+.search-wrap button:hover {
+    transform: scale(1.05);
 }
 
 /* SECTION TITLE */
@@ -202,6 +212,40 @@ body {
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
+.top-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: linear-gradient(135deg, #ff5f6d, #ff9966);
+    color: white;
+    padding: 7px 12px;
+    border-radius: 22px;
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.quick-btn {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    border: none;
+    border-radius: 24px;
+    padding: 8px 14px;
+    background: rgba(255,255,255,0.92);
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 13px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: 0.3s ease;
+}
+
+.destination-card:hover .quick-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .card-body {
     padding: 22px 18px;
     background: transparent;
@@ -218,7 +262,21 @@ body {
 .card-body h6 {
     color: var(--secondary);
     font-weight: 700;
-    margin-bottom: 18px;
+    margin-bottom: 10px;
+}
+
+.rating {
+    margin-top: 6px;
+    margin-bottom: 14px;
+    font-size: 14px;
+    color: #ffaa00;
+    font-weight: 600;
+}
+
+.rating span {
+    color: #666;
+    font-size: 13px;
+    margin-left: 4px;
 }
 
 /* BUTTON */
@@ -382,6 +440,15 @@ body {
     color: white;
 }
 
+.no-results {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 20px;
+    text-align: center;
+    box-shadow: 0 14px 30px rgba(10,37,64,0.08);
+    color: #4c6478;
+}
+
 /* RESPONSIVE */
 @media (max-width: 991px) {
     .banner-content h1 {
@@ -434,40 +501,58 @@ body {
     .vehicle-card i {
         font-size: 24px;
     }
+
+    .quick-btn {
+        opacity: 1;
+        transform: none;
+    }
 }
 </style>
 
 {% include 'hf/nav1.html' %}
 
+<div class="page-space"></div>
 
-    <div class="banner-content"></div>
+
+
+<!-- PACKAGE SECTION -->
+<section class="container my-5">
+    <div class="section-title">
+        <h2>Top Travel Packages</h2>
+        <p>Choose your dream destination with a premium blue UI experience and comfortable vehicle selection.</p>
+        <form method="get" class="search-box mt-4">
             <div class="search-wrap">
                 <input type="text" name="search" placeholder="Search destinations..." value="{{ request.GET.search }}">
                 <button type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>
+        </form>
     </div>
 
-<section class="container my-5">
-    <div class="section-title">
-        <h2>Top Travel Packages</h2>
-        <p>Choose your dream destination with a premium blue UI experience and comfortable vehicle selection.</p>
-    </div>
-
+    {% if dest %}
     <div class="row g-4">
         {% for d in dest %}
         <div class="col-lg-3 col-md-6">
-            <div class="card destination-card">
+            <div class="card destination-card premium-card">
                 <div class="card-img-wrap">
                     <img src="{{ d.dimg.url }}" alt="{{ d.title }}">
                     <div class="destination-overlay"></div>
                     <div class="price-tag">₹{{ d.price }}</div>
+                    <div class="top-badge">🔥 Popular</div>
+
+                    <button class="quick-btn" data-bs-toggle="modal" data-bs-target="#modal{{ d.id }}">
+                        View
+                    </button>
                 </div>
 
                 <div class="card-body">
                     <h5>{{ d.title }}</h5>
                     <h6>{{ d.duration }}</h6>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐☆ <span>(4.5)</span>
+                    </div>
 
                     <button class="btn btn-premium" data-bs-toggle="modal" data-bs-target="#modal{{ d.id }}">
                         View Package
@@ -503,25 +588,25 @@ body {
 
                             <div class="vehicle-options mt-3">
                                 <label class="vehicle-card">
-                                    <input type="radio"  name="vehicle_type" value="Bike" required>
+                                    <input type="radio" name="vehicle_type" value="Bike" required>
                                     <i class="fa-solid fa-motorcycle"></i>
                                     <span>Bike</span>
                                 </label>
 
                                 <label class="vehicle-card">
-                                    <input type="radio"  name="vehicle_type" value="Car">
+                                    <input type="radio" name="vehicle_type" value="Car">
                                     <i class="fa-solid fa-car-side"></i>
                                     <span>Car</span>
                                 </label>
 
                                 <label class="vehicle-card">
-                                    <input type="radio"  name="vehicle_type" value="Van">
+                                    <input type="radio" name="vehicle_type" value="Van">
                                     <i class="fa-solid fa-van-shuttle"></i>
                                     <span>Van</span>
                                 </label>
 
                                 <label class="vehicle-card">
-                                    <input type="radio"  name="vehicle_type" value="Bus">
+                                    <input type="radio" name="vehicle_type" value="Bus">
                                     <i class="fa-solid fa-bus"></i>
                                     <span>Bus</span>
                                 </label>
@@ -538,6 +623,12 @@ body {
         </div>
         {% endfor %}
     </div>
+    {% else %}
+    <div class="no-results">
+        <h4>No packages found</h4>
+        <p>Try searching with another destination name.</p>
+    </div>
+    {% endif %}
 </section>
 
 {% endblock %}

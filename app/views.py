@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.db.models import Q
 from django.shortcuts import redirect, render, get_object_or_404
 from .form import RegisterForm
-from .models import Banner, Timg, Bannerdestination, Destination, Cont, Gallery, Booking,Payment
+from .models import Banner, Timg, Destination, Cont, Gallery, Booking,Payment
 
 
 import qrcode
@@ -30,7 +30,6 @@ def home(request):
     return render(request, 'index.html', {'ba': ba, 'timg': t})
 
 def destination(request):
-    bimg = Bannerdestination.objects.all()
     dest = Destination.objects.all()
 
     category = request.GET.get('type', 'all')
@@ -49,7 +48,7 @@ def destination(request):
         d.desc = [x.strip() for x in d.description.split('/')] if d.description else []
         d.pi = [x.strip() for x in d.includes.split('/')] if d.includes else []
 
-    return render(request, 'Destinations.html', {'bimg': bimg, 'dest': dest})
+    return render(request, 'Destinations.html', { 'dest': dest})
 
 
 def register(request):

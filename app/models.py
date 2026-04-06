@@ -21,13 +21,6 @@ class Timg(models.Model):
         return f"Timg {self.id}"
 
 
-class Bannerdestination(models.Model):
-    Bimg = models.ImageField(upload_to='bd')
-
-    def __str__(self):
-        return f"Bannerdestination {self.id}"
-
-
 class Destination(models.Model):
     category = models.CharField(max_length=50)
     dimg = models.ImageField(upload_to='destination')

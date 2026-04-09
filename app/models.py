@@ -38,9 +38,9 @@ class Destination(models.Model):
 
 class Gallery(models.Model):
     CATEGORY_CHOICES = (
-        ('hill', 'Hill Station'),
-        ('beach', 'Beach'),
-        ('temple', 'Temple'),
+        # ('hill', 'Hill Station'),
+        # ('beach', 'Beach'),
+        # ('temple', 'Temple'),
     )
 
     title = models.CharField(max_length=200, null=True, blank=True)

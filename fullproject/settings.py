@@ -16,6 +16,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-key")
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = [
+    "udtravels.in",
+    "www.udtravels.in",
     "ud-travels.onrender.com",
     "127.0.0.1",
     "localhost",
@@ -23,6 +25,8 @@ ALLOWED_HOSTS = [
 
 CSRF_TRUSTED_ORIGINS = [
     "https://ud-travels.onrender.com",
+    "https://udtravels.in",
+    "https://www.udtravels.in",
 ]
 
 # ==============================

@@ -8,7 +8,8 @@ from app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
+    path('', views.loading, name='loading'),
+    path('home/', views.home, name='home'),
     path('destination', views.destination, name='destination'),
     path('gallery', views.gallery, name='gallery'),
     path('contact', views.contact, name='contact'),

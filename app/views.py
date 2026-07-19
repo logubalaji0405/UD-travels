@@ -265,6 +265,8 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.colors import HexColor
 from reportlab.lib.utils import simpleSplit
 
+def loading(request):
+    return render(request, "loading.html")
 
 
 def download_statement(request, payment_id):

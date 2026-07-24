@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from django.views.static import serve
 from app import views
+from django.views.generic import TemplateView
 from django.contrib.sitemaps.views import sitemap
 from app.sitemaps import StaticViewSitemap
 sitemaps = {
@@ -34,6 +35,13 @@ urlpatterns = [
     # path('chatbot/', views.chatbot, name='chatbot'),
     # path('chatbot-api/', views.chatbot_api, name='chatbot_api'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path(
+        "robots.txt",
+        TemplateView.as_view(
+            template_name="robots.txt",
+            content_type="text/plain",
+        ),
+    ),
 ]
 
 urlpatterns += [

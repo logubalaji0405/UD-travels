@@ -5,6 +5,10 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from django.views.static import serve
 from app import views
+from app.sitemaps import StaticViewSitemap
+sitemaps = {
+    'static': StaticViewSitemap,
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,7 +32,7 @@ urlpatterns = [
     path('booking_history/', views.booking_history, name='booking_history'),
     # path('chatbot/', views.chatbot, name='chatbot'),
     # path('chatbot-api/', views.chatbot_api, name='chatbot_api'),
-
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ]
 
 urlpatterns += [

@@ -7,7 +7,7 @@ class StaticViewSitemap(Sitemap):
 
     def items(self):
         return [
-            '',
+            'loading',
             'home',
             'destination',
             'gallery',

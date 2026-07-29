@@ -36,9 +36,15 @@ urlpatterns = [
     # path('chatbot/', views.chatbot, name='chatbot'),
     # path('chatbot-api/', views.chatbot_api, name='chatbot_api'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-    path("robots.txt", robots_txt, name="robots_txt"),
-]
 
+    path(
+        "robots.txt",
+        TemplateView.as_view(
+            template_name="robots.txt",
+            content_type="text/plain",
+        ),
+    ),
+]
 urlpatterns += [
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]

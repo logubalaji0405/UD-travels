@@ -268,6 +268,10 @@ from reportlab.lib.utils import simpleSplit
 def loading(request):
     return render(request, "loading.html")
 
+from django.shortcuts import render
+
+def robots_txt(request):
+    return render(request, "robots.txt", content_type="text/plain")
 
 def download_statement(request, payment_id):
     payment = get_object_or_404(Payment, id=payment_id)

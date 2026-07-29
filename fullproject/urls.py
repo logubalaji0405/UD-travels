@@ -35,7 +35,7 @@ urlpatterns = [
     path('booking_history/', views.booking_history, name='booking_history'),
     # path('chatbot/', views.chatbot, name='chatbot'),
     # path('chatbot-api/', views.chatbot_api, name='chatbot_api'),
-    path('sitemap.xml/', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path("robots.txt", robots_txt, name="robots_txt"),
 ]
 

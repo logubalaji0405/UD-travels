@@ -15,8 +15,8 @@ sitemaps = {
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.loading, name='loading'),
-    path('home/', views.home, name='home'),
+    path('', views.home, name='home'),
+    path('loading/', views.loading, name='loading'),
     path('destination/', views.destination, name='destination'),
     path('gallery/', views.gallery, name='gallery'),
     path('contact/', views.contact, name='contact'),

@@ -393,3 +393,15 @@ def profile(request):
         'bookings': bookings,
         'first_letter': first_letter,
     })
+
+
+from django.http import HttpResponse
+
+def robots_txt(request):
+    return HttpResponse(
+        "user-agent:" \
+        "*\nAllow: /\n\nSitemap: https://ud-traveler.com/sitemap.xml",
+
+content_type="text/plain"
+
+    )

@@ -399,9 +399,8 @@ from django.http import HttpResponse
 
 def robots_txt(request):
     return HttpResponse(
-        "user-agent:" \
-        "*\nAllow: /\n\nSitemap: https://ud-traveler.com/sitemap.xml",
-
-content_type="text/plain"
-
+        "User-agent: *\n"
+        "Allow: /\n\n"
+        "Sitemap: https://udtravels.in/sitemap.xml",
+        content_type="text/plain"
     )
